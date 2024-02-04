@@ -1,2 +1,2 @@
-# mean-back
-Back End of our MEAN project for IT University (Master 1 Promotion 11)
+### mean-back
+Our MEAN project for IT University (Master 1 Promotion 11)
