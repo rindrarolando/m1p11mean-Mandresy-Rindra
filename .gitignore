@@ -1,1 +1,4 @@
-.DS_Store
+# for backend
+be/node_modules/
+be/dist/
+be/.DS_Store
