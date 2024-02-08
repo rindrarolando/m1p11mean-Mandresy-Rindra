@@ -2,7 +2,7 @@ const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/user');
+const { User } = require('../models/user');
 const config = require('../config/keys');
 const helper = require('../helpers/common')
 const opts = {

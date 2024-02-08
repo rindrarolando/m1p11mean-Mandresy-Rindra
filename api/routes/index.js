@@ -1,7 +1,7 @@
 const express = require('express')
 const auth = require('./auth')
 const user = require('./user')
-const admin = require('./admin')
+const service = require('./service')
 const employee = require('./employee')
 const appointment = require('./appointment')
 const helper = require('../helpers/common')
@@ -21,7 +21,7 @@ module.exports = app => {
     app.use('/api/auth',auth)
     app.use('/api/user', authenticate, authRole(ROLE.USER), user)
     app.use('/api/employee', authenticate, authRole(ROLE.EMPLOYEE), employee)
-    app.use('/api/admin', authenticate, authRole(ROLE.ADMIN), admin)
+    app.use('/api/services', authenticate, authRole(ROLE.ADMIN), service)
     app.use('/api/appointment', authenticate, appointment)
 
 }

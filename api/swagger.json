@@ -66,6 +66,61 @@
               ],
               "responses":{}
             }
+          },
+          "/api/services":{
+            "post":{
+              "tags":["Service"],
+              "description": "Create a Service",
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                { "name":"name", "in": "formData", "required": true, "type": "string" },
+                { "name":"price", "in": "formData", "required": true, "type": "number" },
+                { "name":"duration", "in": "formData", "required": true, "type": "number" },
+                { "name":"commission", "in": "formData", "required": true, "type": "number" }
+              ],
+              "responses":{}
+            },
+            "get":{
+              "tags":["Service"],
+              "description": "Get All Services",
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  }
+              ],
+              "responses":{}
+            }
+          },
+          "/api/services/{id}":{
+            "get":{
+              "tags":["Service"],
+              "description": "Get Service by ID",
+              "parameters": [
+                { "name": "id","in": "path","required": true },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  }
+              ],
+              "responses":{}
+            },
+            "put":{
+              "tags":["Service"],
+              "description": "Update a Service",
+              "parameters": [
+                { "name": "id","in": "path","required": true },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                { "name":"name", "in": "formData", "required": false, "type": "string" },
+                { "name":"price", "in": "formData", "required": false, "type": "number" },
+                { "name":"duration", "in": "formData", "required": false, "type": "number" },
+                { "name":"commission", "in": "formData", "required": false, "type": "number" }
+              ],
+              "responses":{}
+            },
+            "delete":{
+              "tags":["Service"],
+              "description": "Delete a Service",
+              "parameters": [
+                { "name": "id","in": "path","required": true },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  }
+              ],
+              "responses":{}
+            }
           }
           
     }
