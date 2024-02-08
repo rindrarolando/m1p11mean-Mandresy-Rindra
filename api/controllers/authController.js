@@ -134,7 +134,6 @@ const verify = async (req, res) => {
             return helper.sendResponse(res,{message: "Invalid link.", success:false}) 
 
         const token = await tokenService.getToken(req.params.token)
-        console.log(`token mandrivorivooooo :   ${ token }`)
         if (!token) 
             return helper.sendResponse(res, { message: 'We were unable to verify your email. Your link my have expired.', success:false }) //We were unable to find a valid token. Your token my have expired.
 

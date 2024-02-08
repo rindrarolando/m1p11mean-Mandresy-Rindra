@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Users = require('../models/user');
+const { User } = require('../models/user');
 const config =  require('../config/keys');
 
 
 const authenticate = async params => {
-    return Users.findOne({ email:params.email })
+    return User.findOne({ email:params.email })
         .then(async user => {
             if(!user)
                 throw new Error('Authentication failed. User not found.');
@@ -42,7 +42,7 @@ const authenticate = async params => {
         })
 }
 const authenticateOnVerification = params => {
-    return Users.findOne({ email:params.email})
+    return User.findOne({ email:params.email})
     .then(user => {
         if(!user)
             throw new Error('Authentication failed. User not found.');
