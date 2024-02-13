@@ -10,6 +10,7 @@ const authenticate = require('../middlewares/authenticate')
 const { ROLE } = require('../rbac/roles')
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('../swagger.json')
+const { authPermission } = require('../middlewares/permission')
 
 module.exports = app => {
 
@@ -17,11 +18,11 @@ module.exports = app => {
         return helper.sendResponseMsg(res, `Welcome to ${ process.env.APP_NAME }`, true, 200)
     })
 
-    app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument,{explorer: true}))
-    app.use('/api/auth',auth)
-    app.use('/api/user', authenticate, authRole(ROLE.USER), user)
-    app.use('/api/employee', authenticate, authRole(ROLE.EMPLOYEE), employee)
-    app.use('/api/services', authenticate, authRole(ROLE.ADMIN), service)
-    app.use('/api/appointment', authenticate, appointment)
+    app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument,{explorer: true}))
+    app.use('/api/v1/auth',auth)
+    app.use('/api/v1/user', authenticate, authRole(ROLE.USER), user)
+    app.use('/api/v1/employees', authenticate, authPermission(ROLE.ADMIN, ROLE.USER), employee)
+    app.use('/api/v1/services', authenticate, authRole(ROLE.ADMIN), service)
+    app.use('/api/v1/appointment', authenticate, appointment)
 
 }

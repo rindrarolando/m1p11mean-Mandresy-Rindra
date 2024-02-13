@@ -1,8 +1,10 @@
-const Service = require('../models/service')
+const { Service } = require('../models/service')
 
 const addService = async data => { return await new Service(data).save() }
 
-const getServices = async () => { return await Service.find({}) }
+const getServices = async (options) => { 
+    return await Service.paginate({}, options)
+}
 
 const getOneService = async serviceID => { return await Service.findById(serviceID) }
 

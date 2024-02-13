@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const Schema = new mongoose.Schema({
     effectiveStartDate: {
@@ -25,9 +26,12 @@ const Schema = new mongoose.Schema({
     commission: {
         type: Number,
         required: 'Service commission is required'
-    },
-    employees: []
+    }
+}, {timestamps: true})
 
-}, {timestamps: true});
+Schema.plugin(mongoosePaginate)
 
-module.exports = mongoose.model('Service', Schema)
+module.exports = {
+    Service: mongoose.model('Service', Schema),
+    ServiceSchema: Schema
+}

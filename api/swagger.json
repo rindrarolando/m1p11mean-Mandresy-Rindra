@@ -7,7 +7,7 @@
     },
     "produces": ["application/json"],
     "paths": {
-        "/api/auth/register":{
+        "/api/v1/auth/register":{
             "put":{
                 "tags": ["Public"],
                 "description": "Client registration",
@@ -20,18 +20,18 @@
                 "responses": {}
             }
           },
-          "/api/auth/login":{
+          "/api/v1/auth/login":{
             "post":{
                 "tags": ["Public"],
                 "description": "User Login",
                 "parameters": [
-                    { "name":"email", "in": "formData", "required": true, "type": "string" },
-                    { "name":"password", "in": "formData", "required": true, "type": "string" }
+                    { "name":"email", "in": "formData", "required": true, "type": "string", "default": "jean.baptiste@gmail.com" },
+                    { "name":"password", "in": "formData", "required": true, "type": "string", "default": "abcd1234" }
                 ],
                 "responses": {}
             }
           },
-          "/api/auth/verify/{token}":{
+          "/api/v1/auth/verify/{token}":{
             "get":{
               "tags":["Public"],
               "description": "Verify client account using token",
@@ -39,7 +39,7 @@
               "responses":{}
             }
           },
-          "/api/auth/resend":{
+          "/api/v1/auth/resend":{
             "post":{
               "tags":["Public"],
               "description": "Resend Verification Email",
@@ -47,7 +47,7 @@
               "responses":{}
             }
           },
-          "/api/auth/validate-token":{
+          "/api/v1/auth/validate-token":{
             "get":{
               "tags":["Auth"],
               "description": "Validate User Token",
@@ -57,7 +57,7 @@
               "responses":{}
             }
           },
-          "/api/auth/refresh":{
+          "/api/v1/auth/refresh":{
             "post":{
               "tags":["Auth"],
               "description": "Refresh User Token",
@@ -67,7 +67,7 @@
               "responses":{}
             }
           },
-          "/api/services":{
+          "/api/v1/services":{
             "post":{
               "tags":["Service"],
               "description": "Create a Service",
@@ -84,12 +84,14 @@
               "tags":["Service"],
               "description": "Get All Services",
               "parameters": [
-                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  }
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                { "name":"pageNumber", "in": "query", "required": true, "type": "number" },
+                { "name":"rowsPerPage", "in": "query", "required": true, "type": "number" }
               ],
               "responses":{}
             }
           },
-          "/api/services/{id}":{
+          "/api/v1/services/{id}":{
             "get":{
               "tags":["Service"],
               "description": "Get Service by ID",
@@ -121,7 +123,134 @@
               ],
               "responses":{}
             }
+          },
+          "/api/v1/employees":{
+            "post": {
+              "tags":["Employee"],
+              "description": "Hire an employee",
+              "consumes": ["application/json"],
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "in": "body",
+                  "required": true,
+                  "name": "employeeData",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "firstName": {
+                            "type": "string",
+                            "example": "Jean"
+                          },
+                          "lastName": {
+                            "type": "string",
+                            "example": "Rakoto"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "jean.rakoto@mail.com"
+                          },
+                          "password": {
+                            "type": "string",
+                            "example": "abcd1234"
+                          }
+                        }
+                      },
+                      "serviceId": {
+                        "type": "string",
+                        "example": "changeThisToTheServiceOfTheNewEmployee"
+                      },
+                      "nationalId": {
+                        "type": "number",
+                        "example": "123456789123"
+                      }
+                    }
+                  }
+                }
+              ],
+              "responses": {}
+            },
+            "get":{
+              "tags":["Employee"],
+              "description": "Get All Employees",
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                { "name":"pageNumber", "in": "query", "required": true, "type": "number" },
+                { "name":"rowsPerPage", "in": "query", "required": true, "type": "number" }
+              ],
+              "responses":{}
+            }
+          },
+          "/api/v1/employees/{id}":{
+            "get":{
+              "tags":["Employee"],
+              "description": "Get Employee by ID",
+              "parameters": [
+                { "name": "id","in": "path","required": true },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  }
+              ],
+              "responses":{}
+            },
+            "put":{
+              "tags":["Employee"],
+              "description": "Update an Employee",
+              "consumes": ["application/json"],
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "in": "body",
+                  "required": true,
+                  "name": "employeeData",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "firstName": {
+                            "type": "string",
+                            "example": "Jean"
+                          },
+                          "lastName": {
+                            "type": "string",
+                            "example": "Rakoto"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "jean.rakoto@mail.com"
+                          },
+                          "password": {
+                            "type": "string",
+                            "example": "abcd1234"
+                          }
+                        }
+                      },
+                      "serviceId": {
+                        "type": "string",
+                        "example": "changeThisToTheServiceOfTheNewEmployee"
+                      },
+                      "nationalId": {
+                        "type": "number",
+                        "example": "123456789123"
+                      }
+                    }
+                  }
+                }
+              ],
+              "responses": {}
+            },
+            "delete":{
+              "tags":["Employee"],
+              "description": "Delete an Employee",
+              "parameters": [
+                { "name": "id","in": "path","required": true },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  }
+              ],
+              "responses":{}
+            }
           }
-          
     }
 }

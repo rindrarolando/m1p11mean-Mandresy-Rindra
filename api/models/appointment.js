@@ -1,12 +1,22 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const { EmployeeSchema } = require('./employee')
+const { ServiceSchema } = require('./service')
+const { UserSchema } = require('./user')
 
 const Schema = new mongoose.Schema({
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
-    },    
+    employee: {
+        type: EmployeeSchema,
+        required: 'An appointment should be associated with an employee'
+    },
+    startDateTime: {
+        type: Date,
+        required: 'StartDateTime is required'
+    },
+    client: {
+        type: UserSchema,
+        required: 'Client attribute is required'
+    }
 
-}, {timestamps: true});
+}, {timestamps: true})
 
-module.exports = mongoose.model('Appointments', Schema);
+module.exports = mongoose.model('Appointments', Schema)
