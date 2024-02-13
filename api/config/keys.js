@@ -8,8 +8,8 @@ module.exports = {
     REFRESH_TOKEN_ALGO:"HS256",
     tokenExpireTime:"4h",
     welcome_email_subject: `Bienvenue sur ${APP_NAME}`,
-    emailUrl:'/api/auth/verify/',
-    emailLocalUrl:`/api/auth/verify/`,
+    emailUrl:'/api/v1/auth/verify/',
+    emailLocalUrl:`/api/v1/auth/verify/`,
     EMAIL_TOKEN_EXPIRY:"12h",
     directories:{
         logs: 'logs',

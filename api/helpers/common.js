@@ -53,13 +53,14 @@ const prettyLog = (msg, label = null) => {
     if(label === null) logger.info(msg)
     else logger.info(label+" :>> "+ msg)
 }
+
 const sendResponse = (res, code, obj) => {
     if(!Number.isInteger(code)){
         obj = code
         code = 200
     }
     if(!res.headersSent)
-    return res.status(code).json(obj)
+        return res.status(code).json({...obj, date: new Date()})
 }
 
 const sendResponseMsg = (res, message, success, code) => {

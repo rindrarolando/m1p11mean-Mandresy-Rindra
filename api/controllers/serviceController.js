@@ -20,7 +20,7 @@ const updateService = async (req, res) => {
 }
 const getServices = async (req, res) => {
     try {
-        const services = await serviceService.getServices()
+        const services = await serviceService.getServices({page: req.query.pageNumber, limit: req.query.rowsPerPage})
 
         return helper.sendResponse(res, {success:true, services: services})
 
