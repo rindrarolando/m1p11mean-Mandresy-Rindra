@@ -48,13 +48,11 @@ async function sendVerificationEmail(user, req, res){
 const register =  async (req, res) => {
 
     try{
-        const data = { email, username, firstName, lastName, password, mobile_number} = req.body
+        const data = { email, firstName, lastName, password, gender} = req.body
        
         let user = await userService.getUserByEmail(data.email)
-            if(user) 
-                return helper.sendResponse(res,{success: false, message: 'Registration failed. User with this email already registered.'})
-
-        Object.assign(data, {username:`${firstName}_${lastName}_${uuidv4()}`})
+        if(user) 
+            return helper.sendResponse(res,{success: false, message: 'An user with this email already exists'})
 
         user =  await userService.addUser(data)
         if(user.err)   
@@ -175,7 +173,7 @@ const login = async (req, res) => {
         .catch(err => {
             helper.prettyLog(err)
             helper.log2File(err.message,'error')
-            helper.sendResponse(res, {success: false, message: err.message} )
+            helper.sendResponse(res, 403, {success: false, message: err.message} )
         })    
     } catch (error) {
         helper.prettyLog(error)

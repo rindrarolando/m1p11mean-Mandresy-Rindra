@@ -26,7 +26,8 @@ const Schema = new mongoose.Schema({
     commission: {
         type: Number,
         required: 'Service commission is required'
-    }
+    },
+    employees: []
 }, {timestamps: true})
 
 Schema.plugin(mongoosePaginate)

@@ -1,33 +1,56 @@
 const { Employee } = require('../models/employee')
 const mongoose = require('mongoose')
 const userService = require('./userService')
+const { User } = require('../models/user')
+const bcrypt = require('bcrypt')
+const { Service } = require('../models/service')
+const ObjectID = require('mongoose').Types.ObjectId
 
 const addEmployee = async data => { 
-    let session = null;
+    
+    const session = await mongoose.connection.startSession()
     try {
-        await Employee.createCollection()
 
-        session = await mongoose.startSession()
         session.startTransaction()
 
-        const newUser = await userService.addUser(data.user)
-        data.user = newUser
-        console.log("Insert User successfully", data.user)
+        // hash employee password
+        bcrypt.genSalt(10, function(err, salt) {
+            if (err) return next(err)
+    
+            bcrypt.hash(data.user.password, salt, function(err, hash) {
+                if (err) return next(err)
+    
+                data.user.password = hash
+            })
+        })
 
-        const newEmployee = await new Employee(data).save()
-        console.log("Insert Employee successfully", newEmployee);
+        // create employee user account
+        const userResults = await User.create([data.user], { session })
+        const newUser = userResults[0]
+        data.user = newUser
+        console.log(data.workSchedule)
+
+        // insert the employee document
+        const employeeRes = await Employee.create([data], { session })
+        const newEmployee = employeeRes[0]
+
+        // add the new employee to the list of the employees his/her Sevice(model)
+        let service = await Service.findById(newEmployee.service._id)
+        await Service.findByIdAndUpdate(service._id, 
+            {$push: {
+                employees: { _id: newUser._id, 
+                    firstName: newUser.firstName, 
+                    lastName: newUser.lastName 
+                }
+            }}, 
+            { session })
 
         await session.commitTransaction()
     } catch (error) {
-        if (session) {
-            await session.abortTransaction();
-        }
-        throw error;
-    } finally {
-        if (session) {
-            session.endSession();
-        }
+        await session.abortTransaction()
+        throw error
     }
+    session.endSession();
 }
 
 const getEmployees = async (options) => { 

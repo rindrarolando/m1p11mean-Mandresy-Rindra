@@ -8,14 +8,15 @@
     "produces": ["application/json"],
     "paths": {
         "/api/v1/auth/register":{
-            "put":{
+            "post":{
                 "tags": ["Public"],
                 "description": "Client registration",
                 "parameters": [
                     { "name":"firstName", "in": "formData", "required": true, "type": "string" },
                     { "name":"lastName", "in": "formData", "required": true, "type": "string" },
                     { "name":"email", "in": "formData", "required": true, "type": "string" },
-                    { "name":"password", "in": "formData", "required": true, "type": "string", "minLength":6 }
+                    { "name":"password", "in": "formData", "required": true, "type": "string", "minLength":6 },
+                    { "name":"gender", "in": "formData", "required": true, "type": "string", "default": "F" }
                 ],
                 "responses": {}
             }
@@ -149,6 +150,10 @@
                             "type": "string",
                             "example": "Rakoto"
                           },
+                          "gender": {
+                            "type": "string",
+                            "example": "F"
+                          },
                           "email": {
                             "type": "string",
                             "example": "jean.rakoto@mail.com"
@@ -156,6 +161,19 @@
                           "password": {
                             "type": "string",
                             "example": "abcd1234"
+                          }
+                        }
+                      },
+                      "workSchedule": {
+                        "type": "object",
+                        "properties": {
+                          "startHour": {
+                            "type": "string",
+                            "example": "09:00"
+                          },
+                          "endHour": {
+                            "type": "string",
+                            "example": "17:00"
                           }
                         }
                       },
