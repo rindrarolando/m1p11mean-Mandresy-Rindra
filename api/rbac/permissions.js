@@ -1,5 +1,17 @@
 const { ROLE } = require('./roles')
 
+function canAddEmployee(user){
+    return (
+        user.role === ROLE.ADMIN
+    )
+}
+
+function canAddService(user){
+    return (
+        user.role === ROLE.ADMIN
+    )
+}
+
 function canViewAppointment(user, appointment){
     return (
         user.role === ROLE.ADMIN ||
@@ -25,8 +37,10 @@ function scopedAppointments(user, appointments){
 }
 
 module.exports = {
+    canAddService,
     canViewAppointment,
     canAddAppointment,
     canDeleteAppointment,
-    scopedAppointments
+    scopedAppointments,
+    canAddEmployee
 }

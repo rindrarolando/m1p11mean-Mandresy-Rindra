@@ -1,4 +1,5 @@
-const helper = require('../helpers/common')
+const helper = require('../helpers/common');
+const { canAddService } = require('../rbac/permissions');
 const serviceService = require('../services/serviceService')
 const ObjectID = require('mongoose').Types.ObjectId; 
 
@@ -63,8 +64,6 @@ const removeService = async (req, res) => {
     }
 }   
 
-
-
 async function setService(req, res, next){
     const serviceId = req.params.id
     req.service = await serviceService.getOneService(serviceId)
@@ -75,6 +74,20 @@ async function setService(req, res, next){
     next()
 }
 
+function authAddService(req, res, next){
+    if(!canAddService(req.user))
+        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de créer de service", false, 403)
+
+    next()
+}
+
+function authUpdateService(req, res, next){
+    if(!canAddService(req.user))
+        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de modifier ou supprimer un service", false, 403)
+
+    next()
+}
+
 module.exports = { 
     setService,
     getOneService,
@@ -82,5 +95,6 @@ module.exports = {
     addNewService,
     updateService,
     removeService,
-    
+    authAddService,
+    authUpdateService
 }

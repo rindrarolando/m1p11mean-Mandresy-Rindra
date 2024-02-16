@@ -24,7 +24,6 @@ const authenticate = async params => {
                 role: user.role,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                username:user.username,
                 // role: role,
             }
             let refreshToken = jwt.sign(payload, config.REFRESH_TOKEN_SECRET, {
@@ -57,7 +56,6 @@ const authenticateOnVerification = params => {
             id: user.id,
             firstName: user.firstName,
             lastName: user.lastName,
-            username:user.username,
             role: user.role,
             time: new Date()
         }

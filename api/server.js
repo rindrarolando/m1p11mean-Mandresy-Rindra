@@ -69,3 +69,5 @@ const PORT = parseInt(process.env.PORT)
     })
 //#endregion
 
+module.exports = connection
+

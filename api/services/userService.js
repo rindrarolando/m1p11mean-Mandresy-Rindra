@@ -1,13 +1,13 @@
-const { User } = require('../models/user');
-var ObjectID = require('mongoose').Types.ObjectId; 
+const { User } = require('../models/user')
+var ObjectID = require('mongoose').Types.ObjectId
 
 const hiddedField =  ['-password' ]
 
 const addUser = async data => { return await new User(data).save() }
 
-const getUserByEmail = async email => { return User.findOne({email}) }
+const getUserByEmail = async email => { return User.findOne({email}).select(hiddedField) }
 
-const getUserByID = async id => {return await User.findById(id)}
+const getUserByID = async id => {return await User.findById(id).select(hiddedField)}
 
 const getUserByIdWithfields = async (id, fields) => { return await User.findById(id).select(fields) }
 

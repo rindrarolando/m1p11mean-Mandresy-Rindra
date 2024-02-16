@@ -13,12 +13,12 @@ router.route('/')
     .post([
         check('name').not().isEmpty().withMessage("Le nom du service  ne peut être vide")
         
-    ], validate, ServiceController.addNewService)
+    ], validate, ServiceController.authAddService, ServiceController.addNewService)
 
 router.route('/:id')
     .all(ServiceController.setService)
     .get(ServiceController.getOneService)
-    .put(ServiceController.updateService)
-    .delete(ServiceController.removeService)
+    .put(ServiceController.authUpdateService, ServiceController.updateService)
+    .delete(ServiceController.authUpdateService, ServiceController.removeService)
 
 module.exports = router
