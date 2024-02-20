@@ -9,6 +9,9 @@ import { provideServiceWorker } from '@angular/service-worker';
 
 import { withInMemoryScrolling } from '@angular/router';
 
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
@@ -24,5 +27,8 @@ export const appConfig: ApplicationConfig = {
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
-    })]
+    }),
+    provideAnimations(),
+    provideToastr()
+  ]
 };

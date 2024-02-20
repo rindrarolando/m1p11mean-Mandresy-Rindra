@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   })
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   login() {
     this.authService.login(
@@ -34,14 +35,20 @@ export class LoginComponent {
           this.router.navigateByUrl('landing-page');
         },
         error: (error: HttpErrorResponse) => {
-          this.loginFailed(error);
+          if(error.status === 403)
+            this.loginFailed()
+          else
+            console.log(error)
+
         }
       }
     )
   }
 
-  loginFailed(error: HttpErrorResponse) {
-    console.log(error);
+  loginFailed() {
+    this.toastr.error(
+      'Email ou mot de passe incorrect'
+    )
 
     return;
   }

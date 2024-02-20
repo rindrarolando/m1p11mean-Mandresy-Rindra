@@ -11,8 +11,8 @@ import { FooterModule } from './components/footer/footer.module';
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterLink, 
+    CommonModule,
+    RouterLink,
     RouterOutlet,
     HeaderModule,
     FooterModule,
