@@ -31,16 +31,34 @@ export class ServiceComponent implements OnInit {
   columns: any;
   link: any;
   pageRequest: IPageRequest = {pageNumber: 1, rowsPerPage: 8};
-  services: any;
+  servicesRes: any;
 
+  changePage(pageNb: number) {
+    this.pageRequest.pageNumber = pageNb
+
+    // fetch the list of the services
+    this.serviceService.fetchAllServices(this.pageRequest).subscribe({
+      next: ({ services }) => {
+        this.servicesRes = services
+      },
+      error: (err) => {
+        console.log(err);
+
+      }
+    })
+
+  }
 
   ngOnInit(): void {
     this.initialize()
 
     // fetch the list of the services
     this.serviceService.fetchAllServices(this.pageRequest).subscribe({
-      next: (data) => {
-      console.log(data);
+      next: ({ services }) => {
+        this.servicesRes = services
+        console.log(services.toString());
+        this.loaded = true;
+
       },
       error: (err) => {
         console.log(err);

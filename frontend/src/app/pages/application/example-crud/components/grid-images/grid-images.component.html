@@ -4,7 +4,7 @@
       <div class="col">
         <div class="card-movie-img">
           <a (click)="selectItem(record['id'])" (keydown)="selectItem(record['id'])" tabindex="1">
-            <img src="{{ record.image }}" style="cursor: pointer" class="img-fluid shadow-lg rounded" alt="recordname">
+            <img src="/frontend/src/assets/icons/icon-512x512.png" style="cursor: pointer" class="img-fluid shadow-lg rounded" alt="recordname">
           </a>
         </div>
       </div>
@@ -14,7 +14,7 @@
         <div class="card-movie-text">
           <a class="waves-effect" style="cursor: pointer" (click)="selectItem(record['id'])"
             (keydown)="selectItem(record['id'])" tabindex="1">
-            <b style="font-size: 13px;">A Farewell to Arms</b>
+            <b style="font-size: 13px;">{{ record.name }}</b>
           </a>
         </div>
       </div>
