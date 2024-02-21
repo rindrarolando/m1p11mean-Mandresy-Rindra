@@ -5,12 +5,17 @@ import { NotFoundComponent } from './pages/general/not-found/not-found.component
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, },
-
+  {
+    path: 'manager',
+    loadChildren: () => import('./layout/manager/routes')
+      .then(mod => mod.ADMIN_ROUTES)
+  },
   {
     path: 'landing-page',
     loadChildren: () => import('./pages/application/example-landing-page/tutorial.module')
       .then(mod => mod.TutorialModule)
   },
+
   {
     path: 'crud',
     loadChildren: () => import('./pages/application/example-crud/tutorial.module')
@@ -60,7 +65,7 @@ export const routes: Routes = [
     path: 'httpclient',
     loadChildren: () => import('./pages/application/example-items/items.module')
       .then(mod => mod.ItemsModule)
-  },  
+  },
   {
     path: 'bootstrap',
     loadChildren: () => import('./pages/application/example-bootstrap/tutorial.module')

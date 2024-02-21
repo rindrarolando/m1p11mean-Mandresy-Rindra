@@ -1,0 +1,54 @@
+<!-- <app-search-bar [searchField]="searchField" [itemsCount]="itemsCount" [icon]="icon" [results]="results"
+  [placeholder]="placeholder" (search)="onSearch($event)"></app-search-bar> -->
+
+<!-- <div class="row" *ngIf="loaded && itemsCount===0">
+  <div class="col">
+    <app-search-result [searchField]="searchField" [found]="found" [creation]="creation" [link]="link">
+    </app-search-result>
+  </div>
+</div> -->
+
+
+<div class="row" *ngIf="loaded">
+  <div class="col mt-4">
+
+    <app-grid-images [items]="servicesRes.docs" [columns]="columns" [link]="link"></app-grid-images>
+
+    <ul class="pagination mt-4">
+      <!-- First Page -->
+      <li class="page-item" [class.disabled]="servicesRes.page === 1">
+        <a class="page-link" (click)="changePage(servicesRes.page - 1)" (keydown)="changePage(servicesRes.page - 1)" aria-label="First"
+        tabindex="1">
+          <span aria-hidden="true">&laquo;&laquo;</span>
+        </a>
+      </li>
+
+
+      <li class="page-item" [class.disabled]="!servicesRes.hasPrevPage">
+        <a class="page-link" (click)="changePage(servicesRes.page - 1)" (keydown)="changePage(servicesRes.page - 1)" aria-label="Previous"
+        tabindex="1">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <li class="page-item" >
+        <a class="page-link" (click)="changePage(servicesRes.page)" (keydown)="changePage(servicesRes.page)" tabindex="1">{{ servicesRes.page }}</a>
+      </li>
+
+      <li class="page-item" [class.disabled]="!servicesRes.hasNextPage">
+        <a class="page-link" (click)="changePage(servicesRes.page + 1)" (keydown)="changePage(servicesRes.page + 1)" aria-label="Next"
+        tabindex="1">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+
+      <!-- Last Page -->
+      <li class="page-item" [class.disabled]="servicesRes.page === servicesRes.totalPages">
+        <a class="page-link" (click)="changePage(servicesRes.totalPages)" (keydown)="changePage(servicesRes.totalPages)" aria-label="First"
+        tabindex="1">
+          <span aria-hidden="true">&raquo;&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

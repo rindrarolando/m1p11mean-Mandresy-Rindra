@@ -30,6 +30,8 @@ export class LoginComponent {
 
           const token = response.data.token || "";
           localStorage.setItem('salonToken', token);
+          console.log(localStorage.getItem('salonToken'));
+
 
           this.authService.isAuth = true;
           this.router.navigateByUrl('landing-page');
