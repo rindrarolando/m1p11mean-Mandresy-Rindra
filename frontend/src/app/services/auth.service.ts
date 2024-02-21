@@ -12,6 +12,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  getToken() {
+    return localStorage.getItem("salonToken")
+  }
+
   login(email:string, password:string ) {
       return this.http.post(this.apiUrl + 'auth/login', {"email": email,"password": password}, { observe: 'response' });
   }
@@ -20,4 +24,5 @@ export class AuthService {
       localStorage.removeItem("salonToken");
       this.isAuth = false;
   }
+
 }

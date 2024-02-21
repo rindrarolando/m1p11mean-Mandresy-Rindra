@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../../../environments/environment';
 import { Config } from './config';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ConfigService {
 
   public config: Config = new Config();
