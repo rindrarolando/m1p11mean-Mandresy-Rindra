@@ -34,11 +34,8 @@ const getServices = async (req, res) => {
 
 const addNewService = async (req, res) => {
     try{
-        const data = { name } = req.body
-
-        const createdBy = new ObjectID(req.user.id)
-
-        Object.assign(data, {createdBy})
+        let data = { ...req.body}
+        delete data.serviceFile
 
         await serviceService.addService(data)
 
