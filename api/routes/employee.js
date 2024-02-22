@@ -30,5 +30,9 @@ router.route('/:id')
     .get(EmployeeController.getOneEmployee)
     .put(EmployeeController.updateEmployee)
     .delete(EmployeeController.removeEmployee)
+
+router.route('/:id/image')
+    .put(EmployeeController.uploadImage)
+    .get(EmployeeController.downloadImage)
     
 module.exports = router

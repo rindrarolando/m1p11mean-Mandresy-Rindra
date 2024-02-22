@@ -2,6 +2,7 @@ package-lock.json
 logs/*.*
 /*.yml
 api/uploads/services/*
+api/uploads/employees/*
 
 # compiled output
 /dist

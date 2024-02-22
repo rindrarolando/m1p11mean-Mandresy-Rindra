@@ -28,7 +28,6 @@ const addEmployee = async data => {
         const userResults = await User.create([data.user], { session })
         const newUser = userResults[0]
         data.user = newUser
-        console.log(data.workSchedule)
 
         // insert the employee document
         const employeeRes = await Employee.create([data], { session })
@@ -46,11 +45,14 @@ const addEmployee = async data => {
             { session })
 
         await session.commitTransaction()
+        session.endSession()
+        
+        return newEmployee
     } catch (error) {
         await session.abortTransaction()
+        session.endSession()
         throw error
     }
-    session.endSession();
 }
 
 const getEmployees = async (options) => { 

@@ -6,6 +6,37 @@ const { v4: uuidv4 } = require('uuid')
 const userService = require('../services/userService.js')
 const { ROLE } = require('../rbac/roles')
 const { canAddEmployee } = require('../rbac/permissions.js')
+const upload = require('../config/upload')
+const uploadMiddleware = upload.single('employeeFile')
+const path = require('path')
+
+const downloadImage = async (req, res) => {
+    const employeeId = req.params.id
+    const employee = await employeeService.getOneEmployee(employeeId)
+    if(!employee) {
+        helper.sendResponse(res, 404, {message: `Aucun employé a ${ employeeId } comme ID`})
+    }
+
+    const filePath = path.join(path.dirname(require.main.filename), 'uploads',
+        'employees',`${ employeeId }.png`)
+    res.download(filePath, (err) => {
+        if(err){
+            console.log(err);
+            helper.prettyLog(err.message)
+            helper.sendResponse(res, err.statusCode ?? 500, {message: err.message})
+        }
+    })
+}
+
+const uploadImage = (req, res) => {
+    uploadMiddleware(req, res, function (err) {
+        if (err) {
+            return helper.sendResponse(res, 500, {message:err.message, success:false})
+        }
+  
+        helper.sendResponseMsg(res, "Photo de profil ajouté avec succès", true, 200)
+    })
+  }
 
 const getOneEmployee = (req, res) => {
     return helper.sendResponse(res, {success:true, employee:req.employee})
@@ -61,9 +92,9 @@ const addNewEmployee = async (req, res) => {
         Object.assign(data, {service})
         delete data.serviceId
 
-        await employeeService.addEmployee(data)
+        const newEmployee = await employeeService.addEmployee(data)
 
-        return helper.sendResponseMsg(res, 'Employé crée avec succès ', true, 200 )
+        return helper.sendResponseMsg(res, newEmployee._id, true, 200 )
     }
     catch(e){
         helper.prettyLog(`catching ${e}`)
@@ -110,5 +141,7 @@ module.exports = {
     addNewEmployee,
     updateEmployee,
     removeEmployee,
-    authAddEmployee
+    authAddEmployee,
+    uploadImage,
+    downloadImage
 }

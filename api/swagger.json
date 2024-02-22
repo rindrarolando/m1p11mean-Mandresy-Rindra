@@ -204,6 +204,28 @@
               "responses":{}
             }
           },
+          "/api/v1/employees/{id}/image":{
+            "put":{
+              "tags":["Employee"],
+              "description": "Add Employee profile pics",
+              "consumes": ["multipart/form-data"],
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                { "name": "id","in": "path","required": true },
+                { "name": "employeeFile", "in": "formData", "required": true, "type": "file" }
+              ],
+              "responses": {}
+            },
+            "get":{
+              "tags":["Employee"],
+              "description": "Get Employee profile picture",
+              "parameters": [
+                { "name": "id","in": "path","required": true },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  }
+              ],
+              "responses":{}
+            }
+          },
           "/api/v1/employees/{id}":{
             "get":{
               "tags":["Employee"],
