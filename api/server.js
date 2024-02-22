@@ -21,6 +21,7 @@ const PORT = parseInt(process.env.PORT)
     const app = express()
     app.use(express.urlencoded({ extended: true }))
     app.use(express.json())
+    app.use(express.static('uploads/services'))
     process.env['LOCAL_IP']  = helper.getLocalIP()
 //#endregion
 

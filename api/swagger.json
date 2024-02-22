@@ -5,7 +5,7 @@
       "description": "Documentation of Coiffure API",
       "version": "1.0"
     },
-    "produces": ["application/json"],
+    "produces": ["application/json"], 
     "paths": {
         "/api/v1/auth/register":{
             "post":{
@@ -72,12 +72,14 @@
             "post":{
               "tags":["Service"],
               "description": "Create a Service",
+              "consumes": ["multipart/form-data"],
               "parameters": [
                 { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
                 { "name":"name", "in": "formData", "required": true, "type": "string" },
                 { "name":"price", "in": "formData", "required": true, "type": "number" },
                 { "name":"duration", "in": "formData", "required": true, "type": "number" },
-                { "name":"commission", "in": "formData", "required": true, "type": "number" }
+                { "name":"commission", "in": "formData", "required": true, "type": "number" },
+                { "name": "serviceFile", "in": "formData", "required": true, "type": "file" }
               ],
               "responses":{}
             },
