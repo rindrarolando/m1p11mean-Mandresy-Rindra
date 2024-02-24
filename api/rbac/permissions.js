@@ -1,5 +1,11 @@
 const { ROLE } = require('./roles')
 
+function canAddAppointment(user){
+    return (
+        user.role === ROLE.USER
+    )
+}
+
 function canAddEmployee(user){
     return (
         user.role === ROLE.ADMIN
@@ -17,12 +23,6 @@ function canViewAppointment(user, appointment){
         user.role === ROLE.ADMIN ||
         user.role === ROLE.EMPLOYEE ||
         appointment.createdBy == user.id
-    )
-}
-
-function canAddAppointment(user, appointment){
-    return (
-        user.role === ROLE.ADMIN || user.role === ROLE.USER
     )
 }
 

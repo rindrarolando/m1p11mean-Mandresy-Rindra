@@ -4,7 +4,14 @@ const AppointmentController = require('../controllers/appointmentController')
 const validate = require('../middlewares/validate')
 const router = express.Router()
 
-router.get('/',  AppointmentController.getAppointments)
+router.route('/')
+    .post(
+        [
+            check('startDateTime').matches(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/).withMessage("Le champ date et heure doit suivre le format yyyy-MM-ddTHH:mm"),
+            check('mapServiceEmployees').isArray({min: 1}).withMessage("Le rendez-vous doit avoir au moins une service et un employé")
+        ],
+        validate, AppointmentController.authAddAppointment, AppointmentController.addNewAppointment)
+    .get(AppointmentController.getAppointments)
 
 router.get('/:appointmentId', [
     check('appointmentId').not().isEmpty().withMessage('invalid url'),

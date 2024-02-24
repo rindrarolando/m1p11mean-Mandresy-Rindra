@@ -293,6 +293,40 @@
               ],
               "responses":{}
             }
+          },
+          "/api/v1/appointments": {
+            "post": {
+              "tags": ["Appointment"],
+              "description": "Book an appointment",
+              "consumes": ["application/json"],
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QuYXBwb2ludEBtYWlsLmNvbSIsImlkIjoiNjVkOGEzMDM4MGM2ZmIyOWEyMDM1NjFjIiwidGltZSI6IjIwMjQtMDItMjRUMTI6Mzc6NTguODI4WiIsInJvbGUiOiJ1c2VyIiwiZmlyc3ROYW1lIjoidGVzdEFwcG9pbnQiLCJsYXN0TmFtZSI6InRlc3RBcHBvaW50IiwicmVmcmVzaFRva2VuIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmxiV0ZwYkNJNkluUmxjM1F1WVhCd2IybHVkRUJ0WVdsc0xtTnZiU0lzSW1sa0lqb2lOalZrT0dFek1ETTRNR00yWm1JeU9XRXlNRE0xTmpGaklpd2lkR2x0WlNJNklqSXdNalF0TURJdE1qUlVNVEk2TXpjNk5UZ3VPREk0V2lJc0luSnZiR1VpT2lKMWMyVnlJaXdpWm1seWMzUk9ZVzFsSWpvaWRHVnpkRUZ3Y0c5cGJuUWlMQ0pzWVhOMFRtRnRaU0k2SW5SbGMzUkJjSEJ2YVc1MElpd2lhV0YwSWpveE56QTROemM0TWpjNExDSmxlSEFpT2pFM01URXpOekF5TnpoOS5TX0pBdmFxbUVwXzRBRDZRN0xhdjN6MWNyRWFVc0I1T3lQMXU2d1pxSUZRIiwiaWF0IjoxNzA4Nzc4Mjc4LCJleHAiOjE3MDg3OTI2Nzh9.PfT5Bz6ckBdNmotcITq8uAJjp-rtom6_dbGF4F0Fl54", "required": true  },
+                {
+                  "in": "body",
+                  "required": true,
+                  "name": "appointmentData",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "startDateTime": {
+                        "type": "string",
+                        "example": "2024-02-24T09:00"
+                      },
+                      "mapServiceEmployees": {
+                        "type": "array",
+                        "example": [
+                          {
+                            "employeeId": "65d74e0059706fb32059bc97",
+                            "serviceId": "65ce55d55ee61cd2224848fd"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              "responses": {}
+            }
           }
     }
 }
