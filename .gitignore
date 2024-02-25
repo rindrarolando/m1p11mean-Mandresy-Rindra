@@ -7,10 +7,16 @@ upload/services/*
 /dist
 /tmp
 /out-tsc
+/front/dist
+/front/tmp
+/front/out-tsc
+# Only exists if Bazel was run
+/front/bazel-out
 
 # dependencies
 /node_modules
-
+/api/node_modules
+/front/node_modules
 
 # IDEs and editors
 /.idea
@@ -20,6 +26,13 @@ upload/services/*
 *.launch
 .settings/
 *.sublime-workspace
+/front/.idea
+/front/.project
+/front/.classpath
+/front/.c9/
+/front/*.launch
+/front/.settings/
+/front/*.sublime-workspace
 
 # IDE - VSCode
 .vscode/*
@@ -38,7 +51,18 @@ yarn-error.log
 testem.log
 /typings
 .env
+/front/.angular/cache
+/front/.sass-cache
+/front/connect.lock
+/front/coverage
+/front/libpeerconnection.log
+/front/npm-debug.log
+/front:yarn-error.log
+/front/testem.log
+/front/typings
 
 # System Files
 .DS_Store
 Thumbs.db
+/front/.DS_Store
+/front/Thumbs.db
