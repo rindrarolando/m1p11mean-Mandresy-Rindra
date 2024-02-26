@@ -341,6 +341,18 @@
               ],
               "responses": {}
             }
+          },
+          "/api/v1/favorites":{
+            "post":{
+                "tags": ["Favorite"],
+                "description": "Add Client Favorite",
+                "parameters": [
+                  { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": false  },
+                  { "name":"serviceId", "in": "formData", "required": false, "type": "string", "default": "65ce55ab5ee61cd2224848fa" },
+                  { "name":"employeeId", "in": "formData", "required": false, "type": "string", "default": "65db4c3bd84f4e9a84fd449a" }
+                ],
+                "responses": {}
+            }
           }
     }
 }

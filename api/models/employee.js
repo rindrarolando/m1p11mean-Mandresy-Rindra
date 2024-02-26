@@ -30,8 +30,7 @@ const EmployeeSchema = new mongoose.Schema({
     },
     nationalId: {
         type: String,
-        required: true,
-        unique: 'Every employee should have a national identifier'
+        required: true
     },
     workSchedule: {
         type: EmployeeWorkSchedule,
