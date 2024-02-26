@@ -15,6 +15,7 @@ const tokenSchema = new mongoose.Schema({
 
     createdAt: {
         type: Date,
+        timezone: false,
         required: true,
         default: Date.now,
         expires: config.EMAIL_TOKEN_EXPIRY

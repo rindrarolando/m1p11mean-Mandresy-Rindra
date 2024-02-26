@@ -33,7 +33,6 @@ module.exports.checkToken = (req, res, next) => {
       token = token.slice(7, token.length);
     
     if (token) 
-        //console.log(token);
         jwt.verify(token, config.JWT_SECRET, (err, decoded) => {
             if (err) return helper.sendResponse(res,400,{err,success:false});
             

@@ -23,6 +23,6 @@ module.exports = app => {
     app.use('/api/v1/user', authenticate, authRole(ROLE.USER), user)
     app.use('/api/v1/employees', authenticate, authPermission(ROLE.ADMIN, ROLE.EMPLOYEE), employee)
     app.use('/api/v1/services', authenticate, service)
-    app.use('/api/v1/appointment', authenticate, appointment)
+    app.use('/api/v1/appointments', authenticate, appointment)
 
 }

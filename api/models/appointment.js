@@ -3,17 +3,35 @@ const { EmployeeSchema } = require('./employee')
 const { ServiceSchema } = require('./service')
 const { UserSchema } = require('./user')
 
-const Schema = new mongoose.Schema({
-    employee: [{
+const MapServiceEmployeeSchema = new mongoose.Schema({
+    employee: {
         type: EmployeeSchema,
         required: 'Un rendez-vous doit avoir aux moins un employee'
+    },
+    service: {
+        type: ServiceSchema,
+        required: 'Un rendez-vous doit avoir une service'
+    },
+    startDateTime: {
+        type: Date,
+        timezone: false,
+        required: 'Un map de service employé dans un rendez-vous doit avoir un date et heure de début'
+    }
+})
+
+const Schema = new mongoose.Schema({
+    mapServiceEmployees: [{
+        type: MapServiceEmployeeSchema,
+        required: 'Un rendez-vous doit avoir au moins une service et un employé'
     }],
     startDateTime: {
         type: Date,
+        timezone: false,
         required: 'La date et heure de début du rendez-vous est nécessaire'
     },
     endDateTime: {
         type: Date,
+        timezone: false,
         required: 'La date et heure de fin du rendez-vous est nécessaire'
     },
     client: {
@@ -24,8 +42,12 @@ const Schema = new mongoose.Schema({
         type: String,
         enum: ['booked', 'done'],
         default: 'booked'
+    },
+    price: {
+        type: Number,
+        required: 'Le prix des services du rendez-vous est nécessaire.'
     }
 
-}, {timestamps: true})
+})
 
 module.exports = mongoose.model('Appointments', Schema)

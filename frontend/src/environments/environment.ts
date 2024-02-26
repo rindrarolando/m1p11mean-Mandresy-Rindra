@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   apiUrl: '',
+  backendDomain: 'http://localhost:3000/',
   application:
   {
     name: 'angular-starter',

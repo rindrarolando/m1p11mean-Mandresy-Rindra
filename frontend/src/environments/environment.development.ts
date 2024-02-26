@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  backendDomain: 'http://localhost:3000/',
   application:
   {
     name: 'salon-beaute',

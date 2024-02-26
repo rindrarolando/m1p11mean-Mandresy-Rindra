@@ -28,7 +28,6 @@ const addEmployee = async data => {
         const userResults = await User.create([data.user], { session })
         const newUser = userResults[0]
         data.user = newUser
-        console.log(data.workSchedule)
 
         // insert the employee document
         const employeeRes = await Employee.create([data], { session })
@@ -38,7 +37,7 @@ const addEmployee = async data => {
         let service = await Service.findById(newEmployee.service._id)
         await Service.findByIdAndUpdate(service._id, 
             {$push: {
-                employees: { _id: newUser._id, 
+                employees: { _id: newEmployee._id, 
                     firstName: newUser.firstName, 
                     lastName: newUser.lastName 
                 }
@@ -46,11 +45,14 @@ const addEmployee = async data => {
             { session })
 
         await session.commitTransaction()
+        session.endSession()
+        
+        return newEmployee
     } catch (error) {
         await session.abortTransaction()
+        session.endSession()
         throw error
     }
-    session.endSession();
 }
 
 const getEmployees = async (options) => { 

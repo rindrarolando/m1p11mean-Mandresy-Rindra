@@ -21,7 +21,7 @@ const ClientFavoriteSchema = new mongoose.Schema({
     services: [{Service}],
     employees: [{Employee}]
 
-}, {timestamps: true})
+})
 
 module.exports = {
     ClientFavorite: mongoose.model('ClientFavorite', ClientFavoriteSchema)

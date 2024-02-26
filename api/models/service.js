@@ -4,11 +4,13 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 const Schema = new mongoose.Schema({
     effectiveStartDate: {
         type: Date,
+        timezone: false,
         required: true,
         default: Date.now
     },    
     effectiveEndDate: {
         type: Date,
+        timezone: false,
         required: false
     },    
     name: {
@@ -28,7 +30,7 @@ const Schema = new mongoose.Schema({
         required: 'Service commission is required'
     },
     employees: []
-}, {timestamps: true})
+})
 
 Schema.plugin(mongoosePaginate)
 

@@ -37,7 +37,7 @@ const EmployeeSchema = new mongoose.Schema({
         type: EmployeeWorkSchedule,
         required: 'An employee should have an work schedule'
     }
-}, {timestamps: true})
+})
 
 EmployeeSchema.plugin(mongoosePaginate)
 
