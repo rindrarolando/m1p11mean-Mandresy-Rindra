@@ -54,8 +54,8 @@ export class AuthSignInComponent implements OnInit
     {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email     : ['hughes.brian@company.com', [Validators.required, Validators.email]],
-            password  : ['admin', Validators.required],
+            email     : ['', [Validators.required, Validators.email]],
+            password  : ['', Validators.required],
             rememberMe: [''],
         });
     }
@@ -67,7 +67,7 @@ export class AuthSignInComponent implements OnInit
     /**
      * Sign in
      */
-    signIn(): void
+    signIn()
     {
         // Return if the form is invalid
         if ( this.signInForm.invalid )
@@ -86,14 +86,19 @@ export class AuthSignInComponent implements OnInit
             .subscribe(
                 () =>
                 {
-                    // Set the redirect url.
-                    // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
-                    // to the correct page after a successful sign in. This way, that url can be set via
-                    // routing file and we don't have to touch here.
-                    const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/signed-in-redirect';
+                    next: (res : any) => {
+                        const response = res.body
+              
+                        const token = response.data.token || "";
+                        localStorage.setItem('salonToken', token);
+                        console.log(localStorage.getItem('salonToken'));
+              
+              
+                        this._authService._authenticated = true;
+                    }
 
                     // Navigate to the redirect url
-                    this._router.navigateByUrl(redirectURL);
+                    this._router.navigateByUrl('signed-in-redirect');
 
                 },
                 (response) =>

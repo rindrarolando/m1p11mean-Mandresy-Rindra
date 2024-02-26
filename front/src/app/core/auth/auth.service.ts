@@ -3,11 +3,13 @@ import { inject, Injectable } from '@angular/core';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
+import { environment } from "../../../environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class AuthService
 {
-    private _authenticated: boolean = false;
+    private _apiUrl = environment.apiUrl;
+    public _authenticated: boolean = false;
     private _httpClient = inject(HttpClient);
     private _userService = inject(UserService);
 
@@ -59,28 +61,9 @@ export class AuthService
      */
     signIn(credentials: { email: string; password: string }): Observable<any>
     {
-        // Throw error, if the user is already logged in
-        if ( this._authenticated )
-        {
-            return throwError('User is already logged in.');
-        }
-
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
-            switchMap((response: any) =>
-            {
-                // Store the access token in the local storage
-                this.accessToken = response.accessToken;
-
-                // Set the authenticated flag to true
-                this._authenticated = true;
-
-                // Store the user on the user service
-                this._userService.user = response.user;
-
-                // Return a new observable with the response
-                return of(response);
-            }),
-        );
+        return this._httpClient.post(this._apiUrl + 'auth/login', {
+            "email": credentials.email,"password": credentials.password
+        }, { observe: 'response' });
     }
 
     /**
@@ -129,7 +112,7 @@ export class AuthService
     signOut(): Observable<any>
     {
         // Remove the access token from the local storage
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem('salonToken');
 
         // Set the authenticated flag to false
         this._authenticated = false;
