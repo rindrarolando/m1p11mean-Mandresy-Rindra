@@ -1,25 +1,14 @@
 const mongoose = require("mongoose")
-const { Service } = require("./service")
-const { Employee } = require('./employee')
-
-const FavoriteClient = new mongoose.Schema({
-    firstName: {
-        type: String,
-        required: 'Un client doît avoir un prénom'
-    },
-    lastName: {
-        type: String,
-        required: 'Un client doît avoir un nom'
-    }
-})
+const ObjectID = require('mongoose').Types.ObjectId
 
 const ClientFavoriteSchema = new mongoose.Schema({
-    client: {
-        type: FavoriteClient,
-        required: "L'attribut client du document ClientFavorite est obligatoire"
+    clientId: {
+        type: ObjectID,
+        ref: 'User',
+        required: true
     },
-    services: [{Service}],
-    employees: [{Employee}]
+    services: [],
+    employees: []
 
 })
 

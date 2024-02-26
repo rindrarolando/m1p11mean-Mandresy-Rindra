@@ -11,6 +11,7 @@ const { ROLE } = require('../rbac/roles')
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('../swagger.json')
 const { authPermission } = require('../middlewares/permission')
+const favorite = require('./favorite.js')
 
 module.exports = app => {
 
@@ -24,5 +25,6 @@ module.exports = app => {
     app.use('/api/v1/employees', authenticate, authPermission(ROLE.ADMIN, ROLE.EMPLOYEE), employee)
     app.use('/api/v1/services', authenticate, service)
     app.use('/api/v1/appointments', authenticate, appointment)
+    app.use('/api/v1/favorites', authenticate, authRole(ROLE.USER), favorite)
 
 }
