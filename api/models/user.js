@@ -9,14 +9,13 @@ const config = require('../config/keys')
 const UserSchema = new mongoose.Schema({
     email: {
         type: String,
-        unique: true,
-        required: 'Your email is required',
+        required: 'User email is required',
         trim: true
     },
 
     password: {
         type: String,
-        required: 'Your password is required',
+        required: 'User password is required',
         max: 100
     },
 
@@ -55,6 +54,7 @@ const UserSchema = new mongoose.Schema({
 
     resetPasswordExpires: {
         type: Date,
+        timezone: false,
         required: false
     },
     role: {
@@ -73,8 +73,9 @@ const UserSchema = new mongoose.Schema({
     },
     
 
-}, {timestamps: true});
+});
 
+UserSchema.index({email: 1}, { unique: true})
 
 UserSchema.pre('save',  function(next) {
     const user = this

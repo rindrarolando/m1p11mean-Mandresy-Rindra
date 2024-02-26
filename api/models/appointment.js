@@ -14,6 +14,7 @@ const MapServiceEmployeeSchema = new mongoose.Schema({
     },
     startDateTime: {
         type: Date,
+        timezone: false,
         required: 'Un map de service employé dans un rendez-vous doit avoir un date et heure de début'
     }
 })
@@ -25,10 +26,12 @@ const Schema = new mongoose.Schema({
     }],
     startDateTime: {
         type: Date,
+        timezone: false,
         required: 'La date et heure de début du rendez-vous est nécessaire'
     },
     endDateTime: {
         type: Date,
+        timezone: false,
         required: 'La date et heure de fin du rendez-vous est nécessaire'
     },
     client: {
@@ -45,6 +48,6 @@ const Schema = new mongoose.Schema({
         required: 'Le prix des services du rendez-vous est nécessaire.'
     }
 
-}, {timestamps: true})
+})
 
 module.exports = mongoose.model('Appointments', Schema)

@@ -37,7 +37,7 @@ const addEmployee = async data => {
         let service = await Service.findById(newEmployee.service._id)
         await Service.findByIdAndUpdate(service._id, 
             {$push: {
-                employees: { _id: newUser._id, 
+                employees: { _id: newEmployee._id, 
                     firstName: newUser.firstName, 
                     lastName: newUser.lastName 
                 }

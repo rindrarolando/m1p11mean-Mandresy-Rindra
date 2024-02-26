@@ -1,8 +1,16 @@
 const express = require('express')
-const {check} = require('express-validator')
+const {check, query} = require('express-validator')
 const AppointmentController = require('../controllers/appointmentController')
 const validate = require('../middlewares/validate')
 const router = express.Router()
+
+router.route('/history')
+    .get(
+        [
+            query('startDateTime').matches(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/).withMessage("Le champ date et heure de debut doit suivre le format yyyy-MM-ddTHH:mm")
+        ],
+        AppointmentController.getAppointmentHistory
+    )
 
 router.route('/')
     .post(

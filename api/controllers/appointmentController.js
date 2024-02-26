@@ -4,6 +4,34 @@ const { canViewAppointment, canAddAppointment, canDeleteAppointment, scopedAppoi
 const ObjectID = require('mongoose').Types.ObjectId
 const serviceService = require('../services/serviceService')
 const employeeService = require('../services/employeeService.js')
+const { ROLE } = require('../rbac/roles.js')
+
+const getAppointmentHistory = async (req, res) => {
+    try {
+        // check the authenticated user
+        const user = req.user
+        const startDateTime = req.query.startDateTime
+        const endDateTime = req.query.endDateTime ? new Date(req.query.endDateTime) : false
+        if(!user)
+            throw new Error('Aucun utilisateur connecté')
+
+        // if the user is a client
+        if(user.role === ROLE.USER) {
+            const appointments = await appointmentService.getClientAppointmentHistory(user._id, startDateTime, endDateTime)
+            helper.sendResponse(res, appointments)
+        } else {
+            // TODO: if the user is an employee
+            throw new Error('Calme, ny historique an RDV client aloha no efa implementé')
+        }
+
+    } catch (error) {
+        helper.prettyLog(`catching ${error}`)
+        // TODO: why it's not logged into file, man
+        helper.log2File(error.message,'error')
+        return helper.sendResponse(res, 500, {message:error.message, success:false})
+    }
+    
+}
 
 const addNewAppointment = async (req, res) => {
     try{
@@ -17,6 +45,7 @@ const addNewAppointment = async (req, res) => {
         let price = 0
 
         // verify if the data from the http client are legit
+        // ora, calcolare la data di fine dell'appuntamento
         for(let i = 0; i < reqData.mapServiceEmployees.length; i++) {
             // does the service exist in the db?
             let service = await serviceService.getOneService(reqData.mapServiceEmployees[i].serviceId)
@@ -37,9 +66,7 @@ const addNewAppointment = async (req, res) => {
             nextServiceStartDateTime = new Date(nextServiceStartDateTime.getTime() + service.duration*60000)
             lastServiceDuration = service.duration
         }
-        // ora, calcolare la data di fine dell'appuntamento
-        let appointmentEndDateTime = new Date(nextServiceStartDateTime.getTime() + lastServiceDuration)
-        reqData.endDateTime = appointmentEndDateTime
+        reqData.endDateTime = nextServiceStartDateTime
         
         reqData.status = 'booked'
         reqData.mapServiceEmployees = mapServiceEmployees
@@ -47,7 +74,6 @@ const addNewAppointment = async (req, res) => {
 
         // the authenticated user is the client
         reqData.client = req.user
-        console.log(reqData.client)
 
         const { _id } = await appointmentService.addAppointment(reqData)
 
@@ -133,5 +159,5 @@ module.exports = {
     getAppointments,
     addNewAppointment,
     removeAppointment,
-    
+    getAppointmentHistory
 }
