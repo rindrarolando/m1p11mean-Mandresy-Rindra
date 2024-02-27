@@ -9,7 +9,7 @@ router.route('/history')
         [
             query('startDateTime').matches(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/).withMessage("Le champ date et heure de debut doit suivre le format yyyy-MM-ddTHH:mm")
         ],
-        AppointmentController.getAppointmentHistory
+        AppointmentController.authViewAppointmentHistory, AppointmentController.getAppointmentHistory
     )
 
 router.route('/')

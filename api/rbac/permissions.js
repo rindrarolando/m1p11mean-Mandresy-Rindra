@@ -1,5 +1,12 @@
 const { ROLE } = require('./roles')
 
+function canViewAppointmentHistory(user) {
+    return (
+        user.role === ROLE.USER ||
+        user.role === ROLE.EMPLOYEE
+    )
+}
+
 function canAddAppointment(user){
     return (
         user.role === ROLE.USER
@@ -42,5 +49,6 @@ module.exports = {
     canAddAppointment,
     canDeleteAppointment,
     scopedAppointments,
-    canAddEmployee
+    canAddEmployee,
+    canViewAppointmentHistory
 }

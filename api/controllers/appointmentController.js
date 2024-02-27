@@ -1,6 +1,6 @@
 const helper = require('../helpers/common')
 const appointmentService = require('../services/appointmentService')
-const { canViewAppointment, canAddAppointment, canDeleteAppointment, scopedAppointments } = require('../rbac/permissions')
+const { canViewAppointment, canAddAppointment, canDeleteAppointment, scopedAppointments, canViewAppointmentHistory } = require('../rbac/permissions')
 const ObjectID = require('mongoose').Types.ObjectId
 const serviceService = require('../services/serviceService')
 const employeeService = require('../services/employeeService.js')
@@ -18,6 +18,9 @@ const getAppointmentHistory = async (req, res) => {
         // if the user is a client
         if(user.role === ROLE.USER) {
             const appointments = await appointmentService.getClientAppointmentHistory(user._id, startDateTime, endDateTime)
+            helper.sendResponse(res, appointments)
+        } else if(user.role === ROLE.EMPLOYEE ) {
+            const appointments = await appointmentService.getEmployeeAppointmentHistory(user._id, startDateTime, endDateTime)
             helper.sendResponse(res, appointments)
         } else {
             // TODO: if the user is an employee
@@ -139,7 +142,14 @@ function authGetAppointment(req, res, next) {
 
 function authAddAppointment(req, res, next){
     if(!canAddAppointment(req.user))
-        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de créer un rendez-vous.", false, 403)
+        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de créer un rendez-vous.", false, 401)
+
+    next()
+}
+
+function authViewAppointmentHistory(req, res, next){
+    if(!canViewAppointmentHistory(req.user))
+        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de voir l'historique de rendez-vous.", false, 401)
 
     next()
 }
@@ -159,5 +169,6 @@ module.exports = {
     getAppointments,
     addNewAppointment,
     removeAppointment,
-    getAppointmentHistory
+    getAppointmentHistory,
+    authViewAppointmentHistory
 }
