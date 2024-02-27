@@ -1,10 +1,35 @@
 const helper = require('../helpers/common')
 const appointmentService = require('../services/appointmentService')
-const { canViewAppointment, canAddAppointment, canDeleteAppointment, scopedAppointments } = require('../rbac/permissions')
+const { canViewAppointment, canAddAppointment, canDeleteAppointment, scopedAppointments, canViewAppointmentHistory, canMarkAppointmentAsDone } = require('../rbac/permissions')
 const ObjectID = require('mongoose').Types.ObjectId
 const serviceService = require('../services/serviceService')
 const employeeService = require('../services/employeeService.js')
 const { ROLE } = require('../rbac/roles.js')
+const employeeTaskService = require('../services/employeeTaskService.js')
+
+// TODO : Implement it
+const markAppointmentAsDone = async (req, res) => {
+    try{
+        const appointment = await appointmentService.markAppointmentAsDone(req.appointment._id)
+        if(appointment){
+            // create employee task for each service done
+            const mapServiceEmployees = appointment.mapServiceEmployees
+            for(let i = 0; i < mapServiceEmployees.length; i++) {
+                await employeeTaskService.addTask(mapServiceEmployees[i])
+            }
+
+            helper.sendResponseMsg(res, appointment, true, 200)
+        }
+        else {
+            helper.sendResponse(res, 500, "Une erreur est survenue durant la mise à jour du rendez-vous")
+        }
+    }
+    catch(e){
+        helper.prettyLog(`catching ${e}`)
+        helper.log2File(e.message,'error')
+        return helper.sendResponse(res, 500, {message:e.message, success:false})
+    }
+}
 
 const getAppointmentHistory = async (req, res) => {
     try {
@@ -18,6 +43,9 @@ const getAppointmentHistory = async (req, res) => {
         // if the user is a client
         if(user.role === ROLE.USER) {
             const appointments = await appointmentService.getClientAppointmentHistory(user._id, startDateTime, endDateTime)
+            helper.sendResponse(res, appointments)
+        } else if(user.role === ROLE.EMPLOYEE ) {
+            const appointments = await appointmentService.getEmployeeAppointmentHistory(user._id, startDateTime, endDateTime)
             helper.sendResponse(res, appointments)
         } else {
             // TODO: if the user is an employee
@@ -86,6 +114,13 @@ const addNewAppointment = async (req, res) => {
     }
 } 
 
+const authMarkAppointmentAsDone = async (req, res, next) => {
+    if(!canMarkAppointmentAsDone(req.user))
+        return helper.sendResponseMsg(res, 'Non autorisé', false, 401)
+
+    next()
+}
+
 const getOneAppointment = (req, res) => {
 
     return helper.sendResponse(res, {success:true, appointment:req.appointment})
@@ -121,11 +156,11 @@ const removeAppointment = async (req, res) => {
 
 
 async function setAppointment(req, res, next){
-    const appointmentId = req.params.appointmentId
-    req.appointment = await appointmentService.getOneAppointment(appointmentId)
+    const id = req.params.id
+    req.appointment = await appointmentService.getOneAppointment(id)
     
     if (req.appointment == null)
-        return helper.sendResponseMsg(res, 'Appointment not found', false, 404)
+        return helper.sendResponseMsg(res, `Aucun rendez-vous n'a ${ id } comme ref`, false, 404)
     
     next()
 }
@@ -139,7 +174,14 @@ function authGetAppointment(req, res, next) {
 
 function authAddAppointment(req, res, next){
     if(!canAddAppointment(req.user))
-        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de créer un rendez-vous.", false, 403)
+        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de créer un rendez-vous.", false, 401)
+
+    next()
+}
+
+function authViewAppointmentHistory(req, res, next){
+    if(!canViewAppointmentHistory(req.user))
+        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de voir l'historique de rendez-vous.", false, 401)
 
     next()
 }
@@ -159,5 +201,8 @@ module.exports = {
     getAppointments,
     addNewAppointment,
     removeAppointment,
-    getAppointmentHistory
+    getAppointmentHistory,
+    authViewAppointmentHistory,
+    markAppointmentAsDone,
+    authMarkAppointmentAsDone
 }

@@ -25,6 +25,9 @@ router.route('/')
         
         ], EmployeeController.getEmployees)
 
+router.route('/daily-task')
+        .get(EmployeeController.authDailyTask, EmployeeController.getDailyTask)
+
 router.route('/:id')
     .all(EmployeeController.setEmployee)
     .get(EmployeeController.getOneEmployee)
