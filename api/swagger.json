@@ -402,6 +402,17 @@
               ],
                 "responses": {}
             }
+          },
+          "/api/v1/appointments/{id}":{
+            "put":{
+                "tags": ["Appointment"],
+                "description": "Mark an Appointment as Done",
+                "parameters": [
+                  { "name": "id","in": "path","required": true },
+                  { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  }
+                ],
+                "responses": {}
+            }
           }
     }
 }

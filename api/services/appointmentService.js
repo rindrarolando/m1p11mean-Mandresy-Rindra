@@ -69,6 +69,14 @@ const getClientAppointmentHistory = async (clientId, startDateTime, endDateTime)
     }
 }
 
+const markAppointmentAsDone = async (appointmentId) => {
+    return await Appointment.findByIdAndUpdate(
+        appointmentId,
+        { $set: { status: 'done' } },
+        { new: true }
+    )
+}
+
 const addAppointment = async data => { return await new Appointment(data).save() }
 
 const getAppointments = async () => { return await Appointment.find({}) }
@@ -87,5 +95,6 @@ module.exports = {
     getOneAppointment,
     deleteAppointment,
     getClientAppointmentHistory,
-    getEmployeeAppointmentHistory
+    getEmployeeAppointmentHistory,
+    markAppointmentAsDone
 }

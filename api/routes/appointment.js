@@ -21,11 +21,8 @@ router.route('/')
         validate, AppointmentController.authAddAppointment, AppointmentController.addNewAppointment)
     .get(AppointmentController.getAppointments)
 
-router.get('/:appointmentId', [
-    check('appointmentId').not().isEmpty().withMessage('invalid url'),
-    check('appointmentId').isLength({min: 24}).withMessage('invalid url')
-
-], validate, AppointmentController.setAppointment, AppointmentController.authGetAppointment, AppointmentController.getOneAppointment)
+router.route('/:id')
+    .put(AppointmentController.setAppointment, AppointmentController.authMarkAppointmentAsDone, AppointmentController.markAppointmentAsDone)
 
 router.delete('/:appointmentId', [
     check('appointmentId').not().isEmpty().withMessage('invalid url'),
