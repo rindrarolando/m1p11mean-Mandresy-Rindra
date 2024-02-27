@@ -65,6 +65,13 @@ export class AuthService
             "email": credentials.email,"password": credentials.password
         }, { observe: 'response' });
     }
+    
+    /**
+     * getting token from local storage
+     */
+    getToken() {
+        return localStorage.getItem("salonToken")
+    }
 
     /**
      * Sign in using the access token
