@@ -61,6 +61,8 @@ const getEmployees = async (options) => {
 
 const getOneEmployee = async employeeID => { return await Employee.findById(employeeID) }
 
+const findByUserId = async userid => { return await Employee.findOne({'user._id': userid}) }
+
 const updateEmployee = async (id, update,select) => {
     return await Employee.findOneAndUpdate({_id: id}, update, {
         new: true
@@ -76,5 +78,6 @@ module.exports = {
     getEmployees,
     getOneEmployee,
     updateEmployee,
-    deleteEmployee
+    deleteEmployee,
+    findByUserId
 }

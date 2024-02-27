@@ -5,10 +5,11 @@ const ObjectID = require('mongoose').Types.ObjectId
 const { v4: uuidv4 } = require('uuid')
 const userService = require('../services/userService.js')
 const { ROLE } = require('../rbac/roles')
-const { canAddEmployee } = require('../rbac/permissions.js')
+const { canAddEmployee, canCheckDailyTask } = require('../rbac/permissions.js')
 const upload = require('../config/upload')
 const uploadMiddleware = upload.single('employeeFile')
 const path = require('path')
+const employeeTaskService = require('../services/employeeTaskService.js')
 
 const downloadImage = async (req, res) => {
     const employeeId = req.params.id
@@ -37,6 +38,21 @@ const uploadImage = (req, res) => {
         helper.sendResponseMsg(res, "Photo de profil ajouté avec succès", true, 200)
     })
   }
+
+  const getDailyTask = async (req, res) => {
+    try{
+        const date = req.query.date
+        const employee = await employeeService.findByUserId(req.user._id)
+        const employeeDailyTasks = await employeeTaskService.getEmployeeDailyTasks(employee._id, date)
+
+        return helper.sendResponseMsg(res, employeeDailyTasks, true, 200 )
+    }
+    catch(e){
+        helper.prettyLog(`catching ${e}`)
+        helper.log2File(e.message,'error')
+        return helper.sendResponse(res, 500, {message:e.message, success:false})
+    }
+}
 
 const getOneEmployee = (req, res) => {
     return helper.sendResponse(res, {success:true, employee:req.employee})
@@ -129,7 +145,14 @@ async function setEmployee(req, res, next){
 
 function authAddEmployee(req, res, next){
     if(!canAddEmployee(req.user))
-        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de créer un employé", false, 403)
+        return helper.sendResponseMsg(res, "Cet utilisateur n'a pas le droit de créer un employé", false, 401)
+
+    next()
+}
+
+function authDailyTask(req, res, next){
+    if(!canCheckDailyTask(req.user))
+        return helper.sendResponseMsg(res, "Cet utilisateur n'est pas un employé", false, 401)
 
     next()
 }
@@ -143,5 +166,7 @@ module.exports = {
     removeEmployee,
     authAddEmployee,
     uploadImage,
-    downloadImage
+    downloadImage,
+    authDailyTask,
+    getDailyTask
 }

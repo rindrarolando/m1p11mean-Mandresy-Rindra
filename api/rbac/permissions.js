@@ -26,6 +26,12 @@ function canAddEmployee(user){
     )
 }
 
+function canCheckDailyTask(user){
+    return (
+        user.role === ROLE.EMPLOYEE
+    )
+}
+
 function canAddService(user){
     return (
         user.role === ROLE.ADMIN
@@ -58,5 +64,6 @@ module.exports = {
     scopedAppointments,
     canAddEmployee,
     canViewAppointmentHistory,
-    canMarkAppointmentAsDone
+    canMarkAppointmentAsDone,
+    canCheckDailyTask
 }

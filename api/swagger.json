@@ -413,6 +413,17 @@
                 ],
                 "responses": {}
             }
+          },
+          "/api/v1/employees/daily-task":{
+            "get":{
+                "tags": ["Employee"],
+                "description": "Get Employee Daily Task",
+                "parameters": [
+                  { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplYW5uYWUucmFrb3RvQG1haWwuY29tIiwiaWQiOiI2NWQ3NGUwMDU5NzA2ZmIzMjA1OWJjOTUiLCJ0aW1lIjoiMjAyNC0wMi0yN1QxOTo0MjoxMi4yMjBaIiwicm9sZSI6ImVtcGxveWVlIiwiZmlyc3ROYW1lIjoiSmVhbm5lIiwibGFzdE5hbWUiOiJSYWtvdG8iLCJyZWZyZXNoVG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKbGJXRnBiQ0k2SW1wbFlXNXVZV1V1Y21GcmIzUnZRRzFoYVd3dVkyOXRJaXdpYVdRaU9pSTJOV1EzTkdVd01EVTVOekEyWm1Jek1qQTFPV0pqT1RVaUxDSjBhVzFsSWpvaU1qQXlOQzB3TWkweU4xUXhPVG8wTWpveE1pNHlNakJhSWl3aWNtOXNaU0k2SW1WdGNHeHZlV1ZsSWl3aVptbHljM1JPWVcxbElqb2lTbVZoYm01bElpd2liR0Z6ZEU1aGJXVWlPaUpTWVd0dmRHOGlMQ0pwWVhRaU9qRTNNRGt3TmpJNU16SXNJbVY0Y0NJNk1UY3hNVFkxTkRrek1uMC5laE1jMVFGVGE4dnNpVFlvcmZWZjFtZEpSaGRYWDdaZWs0dDBndjQ1SUM4IiwiaWF0IjoxNzA5MDYyOTMyLCJleHAiOjE3MDkwNzczMzJ9.HjPWiObHZ0gUDCD52DCREekFJA3e0sqckMiOPL2Echk", "required": true  },
+                  { "name": "date", "in": "query", "type": "string", "default": "2024-02-24", "required": true  }
+                ],
+                "responses": {}
+            }
           }
     }
 }
