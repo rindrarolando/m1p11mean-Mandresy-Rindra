@@ -3,11 +3,20 @@ import { initialDataResolver } from 'app/app.resolvers';
 import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
 import { LayoutComponent } from 'app/layout/layout.component';
+import { ServiceListComponent } from './service-list/service-list.component';
+import { ServiceCreateComponent } from './service-create/service-create.component';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
+import { ServiceEditComponent } from './service-edit/service-edit.component';
 
 // @formatter:off
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 export const appRoutes: Route[] = [
+    
+    { path: 'services', component: ServiceListComponent },
+    { path: 'services/create', component: ServiceCreateComponent },
+    { path: 'services/:id', component: ServiceDetailComponent },
+    { path: 'services/edit/:id', component: ServiceEditComponent },
 
     // Redirect empty path to '/dashboards/project'
     {path: '', pathMatch : 'full', redirectTo: 'dashboards/project'},
