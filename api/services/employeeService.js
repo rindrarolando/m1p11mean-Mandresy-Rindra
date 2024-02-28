@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt')
 const { Service } = require('../models/service')
 const ObjectID = require('mongoose').Types.ObjectId
 
+const hiddedField =  ['-user.password' ]
+
 const addEmployee = async data => { 
     
     const session = await mongoose.connection.startSession()
@@ -59,7 +61,7 @@ const getEmployees = async (options) => {
     return await Employee.paginate({}, options)
 }
 
-const getOneEmployee = async employeeID => { return await Employee.findById(employeeID) }
+const getOneEmployee = async employeeID => { return await Employee.findById(employeeID).select(hiddedField) }
 
 const findByUserId = async userid => { return await Employee.findOne({'user._id': userid}) }
 

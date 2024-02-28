@@ -27,6 +27,10 @@ router.route('/')
 
 router.route('/daily-task')
         .get(EmployeeController.authDailyTask, EmployeeController.getDailyTask)
+    
+
+router.route('/avg-time')
+    .get(EmployeeController.getAvgTime)
 
 router.route('/:id')
     .all(EmployeeController.setEmployee)

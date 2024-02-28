@@ -70,6 +70,18 @@ const updateEmployee = async (req, res) => {
     }
 }
 
+const getAvgTime = async (req, res) => {
+    try {
+        const avgTimes = await employeeTaskService.calculateDailyAverageTaskTime()
+        return helper.sendResponse(res, avgTimes)
+        
+    } catch (err) {
+        helper.prettyLog(`catching ${err}`)
+        helper.log2File(err.message,'error')
+        return helper.sendResponse(res, 500, {message:err.message, success:false})
+    }
+}
+
 const getEmployees = async (req, res) => {
     try {
         let employees = await employeeService.getEmployees({page: req.query.pageNumber, limit: req.query.rowsPerPage})
@@ -168,5 +180,6 @@ module.exports = {
     uploadImage,
     downloadImage,
     authDailyTask,
-    getDailyTask
+    getDailyTask,
+    getAvgTime
 }
