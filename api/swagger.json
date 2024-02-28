@@ -300,7 +300,7 @@
               "description": "Book an appointment",
               "consumes": ["application/json"],
               "parameters": [
-                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QuYXBwb2ludEBtYWlsLmNvbSIsImlkIjoiNjVkOGEzMDM4MGM2ZmIyOWEyMDM1NjFjIiwidGltZSI6IjIwMjQtMDItMjRUMTI6Mzc6NTguODI4WiIsInJvbGUiOiJ1c2VyIiwiZmlyc3ROYW1lIjoidGVzdEFwcG9pbnQiLCJsYXN0TmFtZSI6InRlc3RBcHBvaW50IiwicmVmcmVzaFRva2VuIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmxiV0ZwYkNJNkluUmxjM1F1WVhCd2IybHVkRUJ0WVdsc0xtTnZiU0lzSW1sa0lqb2lOalZrT0dFek1ETTRNR00yWm1JeU9XRXlNRE0xTmpGaklpd2lkR2x0WlNJNklqSXdNalF0TURJdE1qUlVNVEk2TXpjNk5UZ3VPREk0V2lJc0luSnZiR1VpT2lKMWMyVnlJaXdpWm1seWMzUk9ZVzFsSWpvaWRHVnpkRUZ3Y0c5cGJuUWlMQ0pzWVhOMFRtRnRaU0k2SW5SbGMzUkJjSEJ2YVc1MElpd2lhV0YwSWpveE56QTROemM0TWpjNExDSmxlSEFpT2pFM01URXpOekF5TnpoOS5TX0pBdmFxbUVwXzRBRDZRN0xhdjN6MWNyRWFVc0I1T3lQMXU2d1pxSUZRIiwiaWF0IjoxNzA4Nzc4Mjc4LCJleHAiOjE3MDg3OTI2Nzh9.PfT5Bz6ckBdNmotcITq8uAJjp-rtom6_dbGF4F0Fl54", "required": true  },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
                 {
                   "in": "body",
                   "required": true,
@@ -334,7 +334,7 @@
               "description": "Get appointment history",
               "consumes": ["application/json"],
               "parameters": [
-                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QuYXBwb2ludEBtYWlsLmNvbSIsImlkIjoiNjVkOGEzMDM4MGM2ZmIyOWEyMDM1NjFjIiwidGltZSI6IjIwMjQtMDItMjZUMDY6MTc6MDUuMDI3WiIsInJvbGUiOiJ1c2VyIiwiZmlyc3ROYW1lIjoidGVzdEFwcG9pbnQiLCJsYXN0TmFtZSI6InRlc3RBcHBvaW50IiwicmVmcmVzaFRva2VuIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmxiV0ZwYkNJNkluUmxjM1F1WVhCd2IybHVkRUJ0WVdsc0xtTnZiU0lzSW1sa0lqb2lOalZrT0dFek1ETTRNR00yWm1JeU9XRXlNRE0xTmpGaklpd2lkR2x0WlNJNklqSXdNalF0TURJdE1qWlVNRFk2TVRjNk1EVXVNREkzV2lJc0luSnZiR1VpT2lKMWMyVnlJaXdpWm1seWMzUk9ZVzFsSWpvaWRHVnpkRUZ3Y0c5cGJuUWlMQ0pzWVhOMFRtRnRaU0k2SW5SbGMzUkJjSEJ2YVc1MElpd2lhV0YwSWpveE56QTRPVEk0TWpJMUxDSmxlSEFpT2pFM01URTFNakF5TWpWOS5KcUJNOVZtUEljVEZ5TnhxaDFGaHlYbW5UUkNsRUIwVW9oYURVVEJGZ0tjIiwiaWF0IjoxNzA4OTI4MjI1LCJleHAiOjE3MDg5NDI2MjV9._cUYUw6cR4T0mALWXN9-R0woFIeFXmNoc8k8Lfiqls8", "required": true  },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
                 { "name":"startDateTime", "in": "query", "required": true, "type": "string", "default": "2024-02-24T09:00" },
                 { "name":"endDateTime", "in": "query", "required": false, "type": "string"}
                 
@@ -360,7 +360,7 @@
                 "description": "Create a Special Offer",
                 "consumes": ["application/json"],
               "parameters": [
-                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QuYXBwb2ludEBtYWlsLmNvbSIsImlkIjoiNjVkOGEzMDM4MGM2ZmIyOWEyMDM1NjFjIiwidGltZSI6IjIwMjQtMDItMjZUMDY6MTc6MDUuMDI3WiIsInJvbGUiOiJ1c2VyIiwiZmlyc3ROYW1lIjoidGVzdEFwcG9pbnQiLCJsYXN0TmFtZSI6InRlc3RBcHBvaW50IiwicmVmcmVzaFRva2VuIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmxiV0ZwYkNJNkluUmxjM1F1WVhCd2IybHVkRUJ0WVdsc0xtTnZiU0lzSW1sa0lqb2lOalZrT0dFek1ETTRNR00yWm1JeU9XRXlNRE0xTmpGaklpd2lkR2x0WlNJNklqSXdNalF0TURJdE1qWlVNRFk2TVRjNk1EVXVNREkzV2lJc0luSnZiR1VpT2lKMWMyVnlJaXdpWm1seWMzUk9ZVzFsSWpvaWRHVnpkRUZ3Y0c5cGJuUWlMQ0pzWVhOMFRtRnRaU0k2SW5SbGMzUkJjSEJ2YVc1MElpd2lhV0YwSWpveE56QTRPVEk0TWpJMUxDSmxlSEFpT2pFM01URTFNakF5TWpWOS5KcUJNOVZtUEljVEZ5TnhxaDFGaHlYbW5UUkNsRUIwVW9oYURVVEJGZ0tjIiwiaWF0IjoxNzA4OTI4MjI1LCJleHAiOjE3MDg5NDI2MjV9._cUYUw6cR4T0mALWXN9-R0woFIeFXmNoc8k8Lfiqls8", "required": true  },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
                 {
                   "in": "body",
                   "required": true,
@@ -419,7 +419,7 @@
                 "tags": ["Employee"],
                 "description": "Get Employee Daily Task",
                 "parameters": [
-                  { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplYW5uYWUucmFrb3RvQG1haWwuY29tIiwiaWQiOiI2NWQ3NGUwMDU5NzA2ZmIzMjA1OWJjOTUiLCJ0aW1lIjoiMjAyNC0wMi0yN1QxOTo0MjoxMi4yMjBaIiwicm9sZSI6ImVtcGxveWVlIiwiZmlyc3ROYW1lIjoiSmVhbm5lIiwibGFzdE5hbWUiOiJSYWtvdG8iLCJyZWZyZXNoVG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKbGJXRnBiQ0k2SW1wbFlXNXVZV1V1Y21GcmIzUnZRRzFoYVd3dVkyOXRJaXdpYVdRaU9pSTJOV1EzTkdVd01EVTVOekEyWm1Jek1qQTFPV0pqT1RVaUxDSjBhVzFsSWpvaU1qQXlOQzB3TWkweU4xUXhPVG8wTWpveE1pNHlNakJhSWl3aWNtOXNaU0k2SW1WdGNHeHZlV1ZsSWl3aVptbHljM1JPWVcxbElqb2lTbVZoYm01bElpd2liR0Z6ZEU1aGJXVWlPaUpTWVd0dmRHOGlMQ0pwWVhRaU9qRTNNRGt3TmpJNU16SXNJbVY0Y0NJNk1UY3hNVFkxTkRrek1uMC5laE1jMVFGVGE4dnNpVFlvcmZWZjFtZEpSaGRYWDdaZWs0dDBndjQ1SUM4IiwiaWF0IjoxNzA5MDYyOTMyLCJleHAiOjE3MDkwNzczMzJ9.HjPWiObHZ0gUDCD52DCREekFJA3e0sqckMiOPL2Echk", "required": true  },
+                  { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
                   { "name": "date", "in": "query", "type": "string", "default": "2024-02-24", "required": true  }
                 ],
                 "responses": {}
@@ -430,7 +430,7 @@
                 "tags": ["Statistic"],
                 "description": "Get Employee Daily Task",
                 "parameters": [
-                  { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplYW5uYWUucmFrb3RvQG1haWwuY29tIiwiaWQiOiI2NWQ3NGUwMDU5NzA2ZmIzMjA1OWJjOTUiLCJ0aW1lIjoiMjAyNC0wMi0yN1QxOTo0MjoxMi4yMjBaIiwicm9sZSI6ImVtcGxveWVlIiwiZmlyc3ROYW1lIjoiSmVhbm5lIiwibGFzdE5hbWUiOiJSYWtvdG8iLCJyZWZyZXNoVG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKbGJXRnBiQ0k2SW1wbFlXNXVZV1V1Y21GcmIzUnZRRzFoYVd3dVkyOXRJaXdpYVdRaU9pSTJOV1EzTkdVd01EVTVOekEyWm1Jek1qQTFPV0pqT1RVaUxDSjBhVzFsSWpvaU1qQXlOQzB3TWkweU4xUXhPVG8wTWpveE1pNHlNakJhSWl3aWNtOXNaU0k2SW1WdGNHeHZlV1ZsSWl3aVptbHljM1JPWVcxbElqb2lTbVZoYm01bElpd2liR0Z6ZEU1aGJXVWlPaUpTWVd0dmRHOGlMQ0pwWVhRaU9qRTNNRGt3TmpJNU16SXNJbVY0Y0NJNk1UY3hNVFkxTkRrek1uMC5laE1jMVFGVGE4dnNpVFlvcmZWZjFtZEpSaGRYWDdaZWs0dDBndjQ1SUM4IiwiaWF0IjoxNzA5MDYyOTMyLCJleHAiOjE3MDkwNzczMzJ9.HjPWiObHZ0gUDCD52DCREekFJA3e0sqckMiOPL2Echk", "required": true  }
+                  { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  }
                 ],
                 "responses": {}
             }
@@ -439,13 +439,30 @@
             "get": {
               "tags": ["Special Offer"],
               "parameters": [
-                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplYW5uYWUucmFrb3RvQG1haWwuY29tIiwiaWQiOiI2NWQ3NGUwMDU5NzA2ZmIzMjA1OWJjOTUiLCJ0aW1lIjoiMjAyNC0wMi0yN1QxOTo0MjoxMi4yMjBaIiwicm9sZSI6ImVtcGxveWVlIiwiZmlyc3ROYW1lIjoiSmVhbm5lIiwibGFzdE5hbWUiOiJSYWtvdG8iLCJyZWZyZXNoVG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKbGJXRnBiQ0k2SW1wbFlXNXVZV1V1Y21GcmIzUnZRRzFoYVd3dVkyOXRJaXdpYVdRaU9pSTJOV1EzTkdVd01EVTVOekEyWm1Jek1qQTFPV0pqT1RVaUxDSjBhVzFsSWpvaU1qQXlOQzB3TWkweU4xUXhPVG8wTWpveE1pNHlNakJhSWl3aWNtOXNaU0k2SW1WdGNHeHZlV1ZsSWl3aVptbHljM1JPWVcxbElqb2lTbVZoYm01bElpd2liR0Z6ZEU1aGJXVWlPaUpTWVd0dmRHOGlMQ0pwWVhRaU9qRTNNRGt3TmpJNU16SXNJbVY0Y0NJNk1UY3hNVFkxTkRrek1uMC5laE1jMVFGVGE4dnNpVFlvcmZWZjFtZEpSaGRYWDdaZWs0dDBndjQ1SUM4IiwiaWF0IjoxNzA5MDYyOTMyLCJleHAiOjE3MDkwNzczMzJ9.HjPWiObHZ0gUDCD52DCREekFJA3e0sqckMiOPL2Echk", "required": true  },
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
                 {
                   "name": "code",
                   "in": "path",
                   "required": true,
                   "type": "string",
                   "description": "Unique code of the special offer"
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/api/v1/appointments/daily-appointments/{month}": {
+            "get": {
+              "tags": ["Statistic"],
+              "description": "Get daily appointments count for a specific month",
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "name": "month",
+                  "in": "path",
+                  "required": true,
+                  "type": "integer",
+                  "description": "Month (1-12) for which daily appointments count is needed"
                 }
               ],
               "responses": {}
