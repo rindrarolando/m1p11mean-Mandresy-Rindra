@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const ObjectID = require('mongoose').Types.ObjectId
 
 const SpecialOfferSchema = new mongoose.Schema({
     code: {
@@ -19,7 +20,10 @@ const SpecialOfferSchema = new mongoose.Schema({
         min: 0,
         max: 100,
     },
-    services: [],
+    serviceIds: [{
+        type: ObjectID,
+        ref: 'Service'
+    }],
     startDate: {
         type: Date,
         required: true,
@@ -30,7 +34,7 @@ const SpecialOfferSchema = new mongoose.Schema({
     },
 })
 
-UserSchema.index({code: 1}, { unique: true})
+SpecialOfferSchema.index({code: 1}, { unique: true})
 
 module.exports = {
     SpecialOfferSchema,

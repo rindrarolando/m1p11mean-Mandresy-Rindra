@@ -3,6 +3,12 @@ var ObjectID = require('mongoose').Types.ObjectId
 
 const hiddedField =  ['-password' ]
 
+const findClientUsers = async () => {
+      // Find users with role "user"
+      const clientUsers = await User.find({ role: "user" }).select(hiddedField)
+      return clientUsers
+}
+
 const addUser = async data => { return await new User(data).save() }
 
 const getUserByEmail = async email => { return User.findOne({email}).select(hiddedField) }
@@ -37,4 +43,5 @@ module.exports = {
     generateVerificationToken,
     getUserByField,
     getUserByEmailWithFields,
+    findClientUsers
 }
