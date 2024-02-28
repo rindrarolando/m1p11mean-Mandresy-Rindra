@@ -15,7 +15,7 @@ const addSpecialOffer = async (specialOffer) => {
         to: user.email,
         from: process.env.FROM_EMAIL,
         subject: `Une nouvelle offre spéciale pour vous: ${createdSpecialOffer.title}`,
-        text: createdSpecialOffer.description,
+        html: `${createdSpecialOffer.description}<br>Pour profiter, cliquez <a href="${ process.env.FRONT_URL }/offers/${createdSpecialOffer.code}">ici</a>.`,
         }
 
         await emailer.sendEmail(transporter, mailOptions)

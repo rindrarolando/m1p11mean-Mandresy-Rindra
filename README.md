@@ -1,2 +1,1 @@
-### mean-back
-Our MEAN project for IT University (Master 1 Promotion 11)
+### M1P11MEAN-MANDRESY-RINDRA
