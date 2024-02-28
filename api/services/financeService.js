@@ -20,3 +20,27 @@ exports.calculateMonthlyRevenue = async (selectedYear) => {
 
     return monthlyRevenues
 }
+
+exports.calculateDailyRevenue = async (selectedYear, selectedMonth) => {
+    const dailyRevenues = [];
+
+    // Get the last day of the selected month
+    const lastDayOfMonth = new Date(Date.UTC(selectedYear, selectedMonth, 0, 23, 59, 59, 999))
+
+    for (let day = 1; day <= lastDayOfMonth.getUTCDate(); day++) {
+        const startOfDay = new Date(Date.UTC(selectedYear, selectedMonth - 1, day))
+        const endOfDay = new Date(Date.UTC(selectedYear, selectedMonth - 1, day, 23, 59, 59, 999))
+
+        const dailyAppointments = await Appointment.find({
+            startDateTime: { $gte: startOfDay, $lte: endOfDay }
+        });
+
+        const dailyRevenue = dailyAppointments.reduce((total, appointment) => {
+            return total + appointment.price
+        }, 0);
+
+        dailyRevenues.push({ day, revenue: dailyRevenue })
+    }
+
+    return dailyRevenues
+}
