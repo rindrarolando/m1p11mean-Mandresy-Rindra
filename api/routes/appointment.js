@@ -21,6 +21,8 @@ router.route('/')
         validate, AppointmentController.authAddAppointment, AppointmentController.addNewAppointment)
     .get(AppointmentController.getAppointments)
 
+router.get('/daily-appointments/:month', AppointmentController.getDailyAppointmentsCount)
+
 router.route('/:id')
     .put(AppointmentController.setAppointment, AppointmentController.authMarkAppointmentAsDone, AppointmentController.markAppointmentAsDone)
 

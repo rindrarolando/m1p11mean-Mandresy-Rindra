@@ -8,4 +8,8 @@ const helper = require('../helpers/common')
 router.route('/')
     .post(SpecialOfferController.addSpecialOffer)
 
+router.route('/:code')
+    .all(SpecialOfferController.setSpecialOffer)
+    .get(SpecialOfferController.getSpecialOffer)
+
 module.exports = router

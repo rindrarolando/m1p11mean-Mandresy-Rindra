@@ -7,7 +7,18 @@ const employeeService = require('../services/employeeService.js')
 const { ROLE } = require('../rbac/roles.js')
 const employeeTaskService = require('../services/employeeTaskService.js')
 
-// TODO : Implement it
+const getDailyAppointmentsCount = async (req, res) => {
+    try {
+        const { month } = req.params
+        const result = await appointmentService.getDailyAppointmentsCount(month)
+        helper.sendResponseMsg(res, result, true, 200)
+    } catch (e) {
+        helper.prettyLog(`catching ${e}`)
+        helper.log2File(e.message,'error')
+        return helper.sendResponse(res, 500, {message:e.message, success:false})
+    }
+}
+
 const markAppointmentAsDone = async (req, res) => {
     try{
         const appointment = await appointmentService.markAppointmentAsDone(req.appointment._id)
@@ -204,5 +215,6 @@ module.exports = {
     getAppointmentHistory,
     authViewAppointmentHistory,
     markAppointmentAsDone,
-    authMarkAppointmentAsDone
+    authMarkAppointmentAsDone,
+    getDailyAppointmentsCount
 }
