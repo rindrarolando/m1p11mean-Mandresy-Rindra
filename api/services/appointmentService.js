@@ -45,6 +45,27 @@ const getEmployeeAppointmentHistory = async (userId, startDateTime, endDateTime)
     }
 }
 
+const getDailyAppointmentsCount = async (month) => {
+    const startOfMonth = new Date(Date.UTC(new Date().getFullYear(), month - 1, 1))
+    const endOfMonth = new Date(Date.UTC(new Date().getFullYear(), month, 0, 23, 59, 59, 999))
+
+    const result = await Appointment.aggregate([
+        {
+            $match: {
+                startDateTime: { $gte: startOfMonth, $lte: endOfMonth }
+            }
+        },
+        {
+            $group: {
+                _id: { $dateToString: { format: '%Y-%m-%d', date: '$startDateTime' } },
+                count: { $sum: 1 }
+            }
+        }
+    ])
+
+    return result
+}
+
 const getClientAppointmentHistory = async (clientId, startDateTime, endDateTime) => {
     
     try {
@@ -96,5 +117,6 @@ module.exports = {
     deleteAppointment,
     getClientAppointmentHistory,
     getEmployeeAppointmentHistory,
-    markAppointmentAsDone
+    markAppointmentAsDone,
+    getDailyAppointmentsCount
 }

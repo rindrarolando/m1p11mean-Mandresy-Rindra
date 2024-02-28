@@ -14,13 +14,37 @@ const addSpecialOffer = async (req, res) => {
         helper.sendResponseMsg(res, specialOffer, true, 201)
     }
     catch(e){
-        console.log(e);
         helper.prettyLog(`catching ${e}`)
         helper.log2File(e.message,'error')
         return helper.sendResponse(res, 500, {message:e.message, success:false})
     }
 }
 
+const setSpecialOffer = async (req, res, next) => {
+    try {
+        const specialOfferCode = req.params.code
+
+        const specialOffer = await specialOfferService.findSpecialOfferByCode(specialOfferCode)
+
+        if (specialOffer) {
+            req.specialOffer = specialOffer
+            next()
+        } else {
+            return helper.sendResponseMsg(res, 'Offre spéciale non trouvé', false, 404)   
+        }
+    } catch (e) {
+        helper.prettyLog(`catching ${e}`)
+        helper.log2File(e.message,'error')
+        return helper.sendResponse(res, 500, {message:e.message, success:false})
+    }
+}
+
+const getSpecialOffer = async (req, res) => {
+    return helper.sendResponse(res, req.specialOffer)
+}
+
 module.exports = {
-    addSpecialOffer
+    addSpecialOffer,
+    setSpecialOffer,
+    getSpecialOffer
 }
