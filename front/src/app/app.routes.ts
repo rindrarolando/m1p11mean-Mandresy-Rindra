@@ -7,6 +7,9 @@ import { ServiceListComponent } from './service-list/service-list.component';
 import { ServiceCreateComponent } from './service-create/service-create.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { ServiceEditComponent } from './service-edit/service-edit.component';
+import { EmployeeCreateComponent } from './employee-create/employee-create.component';
+import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 // @formatter:off
 /* eslint-disable max-len */
@@ -17,6 +20,11 @@ export const appRoutes: Route[] = [
     { path: 'services/create', component: ServiceCreateComponent },
     { path: 'services/:id', component: ServiceDetailComponent },
     { path: 'services/edit/:id', component: ServiceEditComponent },
+    
+    { path: 'employees', component: EmployeeListComponent },
+    { path: 'employees/create', component: EmployeeCreateComponent },
+    { path: 'employees/:id', component: EmployeeDetailComponent },
+    { path: 'employees/edit/:id', component: EmployeeListComponent },
 
     // Redirect empty path to '/dashboards/project'
     {path: '', pathMatch : 'full', redirectTo: 'dashboards/project'},
