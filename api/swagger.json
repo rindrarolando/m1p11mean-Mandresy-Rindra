@@ -467,6 +467,24 @@
               ],
               "responses": {}
             }
+          },
+          "/api/v1/finances/monthly-revenue": {
+            "get": {
+              "tags": ["Statistic"],
+              "description": "Get the total sales revenue for a specific month",
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "name": "year",
+                  "in": "query",
+                  "required": true,
+                  "type": "number",
+                  "format": "date",
+                  "default": "2024"
+                }
+              ],
+              "responses": {}
+            }
           }
     }
 }
