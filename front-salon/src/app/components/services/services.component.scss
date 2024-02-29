@@ -1,0 +1,86 @@
+.services-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.service-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adapt number of columns based on container width */
+    gap: 20px; /* Space between cards */
+    padding: 20px; /* Padding around the grid */
+}
+
+.service-item {
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #dee2e6; /* Light grey border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the content */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Soft shadow for depth */
+}
+
+.service-item button {
+    background-color: #4CAF50; /* Green background, change as needed */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 20px; /* Top and Bottom, Left and Right padding */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; /* Adjust size as needed */
+    margin: 4px 2px; /* Spacing around the button */
+    transition-duration: 0.4s; /* Smooth transition for hover effect */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.service-item button:hover {
+    background-color: #45a049; /* Darker shade of button color on hover */
+    color: white; /* Maintain white text on hover */
+}
+
+.service-price {
+    margin-top: auto; /* Pushes the price to the bottom of the card */
+    color: #007bff; /* Blue color for price */
+    font-size: 1.2rem; /* Larger font size for price */
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .service-item {
+        width: calc(50% - 20px); /* Two items per row on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .service-item {
+        width: 100%; /* Full width on very small screens */
+    }
+}
+
+@media (min-width: 768px) { /* Adjust based on your design */
+    .service-list {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    }
+}
+
+.booking-date {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.booking-date label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.booking-date input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+

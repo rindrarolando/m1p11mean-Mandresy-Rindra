@@ -1,0 +1,17 @@
+<div class="services-container">
+    <h2>Our Services</h2>
+    <div class="service-list">
+        <div *ngFor="let service of services" class="service-item">
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
+            <p class="service-price">Price: ${{ service.price }}</p>
+            <!-- Add date input here -->
+            <div class="booking-date">
+                <label for="booking-date-{{service.id}}">Choose your date:</label>
+                <input type="date" id="booking-date-{{service.id}}" [(ngModel)]="service.bookingDate" name="bookingDate-{{service.id}}">
+            </div>
+            <button (click)="bookService(service)">Book Now</button>
+        </div>
+    </div>
+</div>
+

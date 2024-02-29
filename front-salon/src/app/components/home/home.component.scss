@@ -1,0 +1,27 @@
+.home-container {
+    min-height: 100vh; /* 100% of the viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('https://source.unsplash.com/featured/?beauty,salon');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.home-container h1 {
+    font-size: 2.5rem; /* Example size, adjust based on your design */
+    font-weight: bold;
+}
+
+.home-container p {
+    font-size: 1.2rem;
+    font-weight: 400; /* Normal weight */
+}
+
+.img-responsive {
+    width: 100%; /* Make the image fill the container width */
+    height: auto; /* Keep the image's aspect ratio */
+    border-radius: 8px; /* Optional: adds rounded corners to the image */
+}
+
