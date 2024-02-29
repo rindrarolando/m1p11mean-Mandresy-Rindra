@@ -19,7 +19,9 @@ async function sendVerificationEmail(user, req, res){
 
         const em = crpytR.encrypt(user.email)
 
-        const verifyLink = process.env.PRODUCTION === "true" ? `${config.emailUrl}${em}/verifyemail?token=${token.token}&verify=true`:`http://${process.env.LOCAL_IP}:${process.env.PORT}${config.emailLocalUrl}${token.token}` 
+        const verifyLink = process.env.PRODUCTION === "true" ? 
+            `${process.env.PROD_URL}${config.emailUrl}${token.token}`
+            : `http://${process.env.LOCAL_IP}:${process.env.PORT}${config.emailLocalUrl}${token.token}` 
 
         const emailOptions = {
             from: process.env.FROM_EMAIL,    
