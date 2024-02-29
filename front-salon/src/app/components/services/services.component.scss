@@ -5,64 +5,64 @@
 
 .service-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adapt number of columns based on container width */
-    gap: 20px; /* Space between cards */
-    padding: 20px; /* Padding around the grid */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; 
+    padding: 20px; 
 }
 
 .service-item {
-    background-color: #f8f9fa; /* Light grey background */
-    border: 1px solid #dee2e6; /* Light grey border */
-    border-radius: 10px; /* Rounded corners */
+    background-color: #f8f9fa; 
+    border: 1px solid #dee2e6; 
+    border-radius: 10px; 
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center align the content */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Soft shadow for depth */
+    align-items: center; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
 }
 
 .service-item button {
-    background-color: #4CAF50; /* Green background, change as needed */
-    color: white; /* White text */
-    border: none; /* No border */
-    padding: 10px 20px; /* Top and Bottom, Left and Right padding */
+    background-color: #4CAF50; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px; /* Adjust size as needed */
-    margin: 4px 2px; /* Spacing around the button */
-    transition-duration: 0.4s; /* Smooth transition for hover effect */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; 
+    margin: 4px 2px; 
+    transition-duration: 0.4s; 
+    cursor: pointer; 
+    border-radius: 5px; 
 }
 
 .service-item button:hover {
-    background-color: #45a049; /* Darker shade of button color on hover */
-    color: white; /* Maintain white text on hover */
+    background-color: #45a049; 
+    color: white; 
 }
 
 .service-price {
-    margin-top: auto; /* Pushes the price to the bottom of the card */
-    color: #007bff; /* Blue color for price */
-    font-size: 1.2rem; /* Larger font size for price */
+    margin-top: auto; 
+    color: #007bff; 
+    font-size: 1.2rem; 
     font-weight: bold;
 }
 
 @media (max-width: 768px) {
     .service-item {
-        width: calc(50% - 20px); /* Two items per row on smaller screens */
+        width: calc(50% - 20px); 
     }
 }
 
 @media (max-width: 480px) {
     .service-item {
-        width: 100%; /* Full width on very small screens */
+        width: 100%; 
     }
 }
 
-@media (min-width: 768px) { /* Adjust based on your design */
+@media (min-width: 768px) { 
     .service-list {
-        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        grid-template-columns: repeat(3, 1fr); 
     }
 }
 

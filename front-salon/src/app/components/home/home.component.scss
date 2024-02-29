@@ -1,5 +1,5 @@
 .home-container {
-    min-height: 100vh; /* 100% of the viewport height */
+    min-height: 100vh; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,18 +10,18 @@
 }
 
 .home-container h1 {
-    font-size: 2.5rem; /* Example size, adjust based on your design */
+    font-size: 2.5rem; 
     font-weight: bold;
 }
 
 .home-container p {
     font-size: 1.2rem;
-    font-weight: 400; /* Normal weight */
+    font-weight: 400; 
 }
 
 .img-responsive {
-    width: 100%; /* Make the image fill the container width */
-    height: auto; /* Keep the image's aspect ratio */
-    border-radius: 8px; /* Optional: adds rounded corners to the image */
+    width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
 }
 
