@@ -59,18 +59,18 @@ const getAppointmentHistory = async (req, res) => {
             const appointments = await appointmentService.getEmployeeAppointmentHistory(user._id, startDateTime, endDateTime)
             helper.sendResponse(res, appointments)
         } else {
-            // TODO: if the user is an employee
-            throw new Error('Calme, ny historique an RDV client aloha no efa implementé')
+            helper.sendResponseMsg(res, "Cet utilisateur n'est ni un employé ni un client", false, 401)
         }
 
     } catch (error) {
         helper.prettyLog(`catching ${error}`)
-        // TODO: why it's not logged into file, man
         helper.log2File(error.message,'error')
         return helper.sendResponse(res, 500, {message:error.message, success:false})
     }
     
 }
+
+
 
 const addNewAppointment = async (req, res) => {
     try{
@@ -80,7 +80,6 @@ const addNewAppointment = async (req, res) => {
         reqData.startDateTime = new Date(reqData.startDateTime)
         let mapServiceEmployees = []
         let nextServiceStartDateTime = reqData.startDateTime
-        let lastServiceDuration = 0
         let price = 0
 
         // verify if the data from the http client are legit
@@ -96,7 +95,13 @@ const addNewAppointment = async (req, res) => {
             let employee = await employeeService.getOneEmployee(reqData.mapServiceEmployees[i].employeeId)
             if(!employee)
                 throw new Error(`Aucun employé n'a ${ reqData.mapServiceEmployees[i].employeeId } comme ID`)
+
             // TODO: verify if the employee doesn't have something else to do
+            const isEmployeeBusy = await employeeService.isEmployeeBusyDuringTimeRange(employee._id, nextServiceStartDateTime, service.duration)
+            if (isEmployeeBusy) {
+                const msg = `${employee.user.firstName} ${employee.user.lastName} a déjà un autre rendez-vous durant à cet date et heure`
+                helper.sendResponse(res, 400, {message: msg, success:false})
+            }
             
             // push it, push it! 
             mapServiceEmployees.push({employee, service, startDateTime: nextServiceStartDateTime})

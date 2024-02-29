@@ -5,8 +5,27 @@ const { User } = require('../models/user')
 const bcrypt = require('bcrypt')
 const { Service } = require('../models/service')
 const ObjectID = require('mongoose').Types.ObjectId
+const appointmentService = require('../services/appointmentService')
 
 const hiddedField =  ['-user.password' ]
+
+const isEmployeeBusyDuringTimeRange = async (employeeId, startDateTime, endDateTime) => {
+    const existingAppointments = await appointmentService.getAppointmentsByEmployee(employeeId)
+
+    for (const appointment of existingAppointments) {
+        const appointmentStart = appointment.startDateTime
+        const appointmentEnd = appointment.endDateTime
+
+        // Check if there is an overlap in time range
+        if ((startDateTime >= appointmentStart && startDateTime < appointmentEnd) ||
+            (endDateTime > appointmentStart && endDateTime <= appointmentEnd) ||
+            (startDateTime <= appointmentStart && endDateTime >= appointmentEnd)) {
+            return true // Employee is busy during the specified time range
+        }
+    }
+
+    return false // Employee is available
+}
 
 const addEmployee = async data => { 
     
@@ -81,5 +100,6 @@ module.exports = {
     getOneEmployee,
     updateEmployee,
     deleteEmployee,
-    findByUserId
+    findByUserId,
+    isEmployeeBusyDuringTimeRange
 }
