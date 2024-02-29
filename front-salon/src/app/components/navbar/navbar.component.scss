@@ -15,7 +15,7 @@
 .navbar a {
   color: var(--secondary-color);
   text-transform: uppercase;
-  margin-left: 20px; /* Changed from margin-right to margin-left for spacing between links */
+  margin-left: 20px; 
   text-decoration: none;
   font-weight: 600;
 }
@@ -24,13 +24,11 @@
   color: var(--accent-color);
 }
 
-/* Logo specific styles if needed */
 .logo {
-  height: 40px; /* Adjust based on your logo size */
-  margin-right: auto; /* Ensures logo stays on the left and pushes everything else to the right */
+  height: 40px; 
+  margin-right: auto; 
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -41,7 +39,7 @@
 }
 
 .navbar-brand img {
-  height: 60px; /* Adjust based on your preference */
-  width: auto; /* Maintain aspect ratio */
-  margin-right: 15px; /* Space between logo and navbar links */
+  height: 60px; 
+  width: auto; 
+  margin-right: 15px; 
 }

@@ -8,7 +8,7 @@
             <!-- Add date input here -->
             <div class="booking-date">
                 <label for="booking-date-{{service.id}}">Choose your date:</label>
-                <input type="date" id="booking-date-{{service.id}}" [(ngModel)]="service.bookingDate" name="bookingDate-{{service.id}}">
+                <input type="date" id="booking-date-{{service.id}}" name="bookingDate-{{service.id}}">
             </div>
             <button (click)="bookService(service)">Book Now</button>
         </div>

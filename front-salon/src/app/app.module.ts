@@ -10,7 +10,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { ServicesComponent } from './components/services/services.component';
-import { ServiceDetailComponent } from './components/service-detail/service-detail.component';
 
 
 @NgModule({
@@ -21,7 +20,6 @@ import { ServiceDetailComponent } from './components/service-detail/service-deta
     NavbarComponent,
     HomeComponent,
     ServicesComponent,
-    ServiceDetailComponent
   ],
   imports: [
     BrowserModule,
