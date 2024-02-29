@@ -16,7 +16,7 @@ const createDirectories = async () => {
     }
 }
 
-const transporter = nodemailer.createTransport({
+const devTransporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
     secure: process.env.EMAIL_SECURE === "true",
@@ -25,8 +25,19 @@ const transporter = nodemailer.createTransport({
       pass: process.env.EMAIL_PASSWORD,
     },
   })
+  
+const prodTransporter = nodemailer.createTransport({
+    service: "Gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  })
 
 module.exports = {
     createDirectories,
-    transporter
+    transporter: process.env.PRODUCTION === 'true' ? prodTransporter : devTransporter
 }
