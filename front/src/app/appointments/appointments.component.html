@@ -1,9 +1,0 @@
-<div class="appointments-list">
-    <h2>Appointments</h2>
-    <ul>
-        <li *ngFor="let appointment of appointments">
-            {{ appointment.client.name }} - {{ appointment.startDateTime | date:'medium' }}
-            <button (click)="deleteAppointment(appointment._id)">Delete</button>
-        </li>
-    </ul>
-</div>
