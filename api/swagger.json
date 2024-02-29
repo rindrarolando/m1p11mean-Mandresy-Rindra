@@ -513,6 +513,52 @@
               ],
               "responses": {}
             }
+          },
+          "/api/v1/finances/calculate-benefit": {
+            "post": {
+              "tags": ["Statistic"],
+              "description": "Calculate benefit",
+              "consumes": ["application/json"],
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "name": "body",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "integer",
+                        "description": "Year for which benefit is calculated"
+                      },
+                      "month": {
+                        "type": "integer",
+                        "description": "Month for which benefit is calculated"
+                      },
+                      "expenses": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Expense name"
+                            },
+                            "amount": {
+                              "type": "number",
+                              "description": "Expense amount"
+                            }
+                          }
+                        },
+                        "description": "Array of expenses"
+                      }
+                    }
+                  }
+                }
+              ],
+              "responses": {}
+            }
           }
     }
 }
