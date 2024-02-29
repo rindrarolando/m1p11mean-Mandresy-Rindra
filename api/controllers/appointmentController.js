@@ -6,6 +6,7 @@ const serviceService = require('../services/serviceService')
 const employeeService = require('../services/employeeService.js')
 const { ROLE } = require('../rbac/roles.js')
 const employeeTaskService = require('../services/employeeTaskService.js')
+const specialOfferService = require('../services/specialOfferService.js')
 
 const getDailyAppointmentsCount = async (req, res) => {
     try {
@@ -96,7 +97,7 @@ const addNewAppointment = async (req, res) => {
             if(!employee)
                 throw new Error(`Aucun employé n'a ${ reqData.mapServiceEmployees[i].employeeId } comme ID`)
 
-            // TODO: verify if the employee doesn't have something else to do
+            // Verify if the employee doesn't have something else to do
             const isEmployeeBusy = await employeeService.isEmployeeBusyDuringTimeRange(employee._id, nextServiceStartDateTime, service.duration)
             if (isEmployeeBusy) {
                 const msg = `${employee.user.firstName} ${employee.user.lastName} a déjà un autre rendez-vous durant à cet date et heure`
@@ -114,7 +115,21 @@ const addNewAppointment = async (req, res) => {
         
         reqData.status = 'booked'
         reqData.mapServiceEmployees = mapServiceEmployees
-        reqData.price = price
+        
+        // if special offer code exist, then: price = price * specialoffer.discountPercentage/100
+        if(reqData.discountCode) {
+            // find the special offer by code
+            const specialOffer = await specialOfferService.findSpecialOfferByCode(reqData.discountCode)
+            if(specialOffer === null) {
+                return helper.sendResponse(res, 404, {message:'Code promo non trouvé', success:false})
+            }
+
+            // appointment price
+            reqData.price = price * specialOffer.discountPercentage/100
+            reqData.discountPercentage = specialOffer.discountPercentage
+        } else {
+            reqData.price = price
+        }
 
         // the authenticated user is the client
         reqData.client = req.user

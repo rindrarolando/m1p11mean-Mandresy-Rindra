@@ -320,6 +320,10 @@
                             "serviceId": "65ce55d55ee61cd2224848fd"
                           }
                         ]
+                      },
+                      "discountCode": {
+                        "type": "string",
+                        "example": "PROMO"
                       }
                     }
                   }
