@@ -467,6 +467,48 @@
               ],
               "responses": {}
             }
+          },
+          "/api/v1/finances/monthly-revenue": {
+            "get": {
+              "tags": ["Statistic"],
+              "description": "Get the total sales revenue for each month of an year",
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "name": "year",
+                  "in": "query",
+                  "required": true,
+                  "type": "number",
+                  "format": "date",
+                  "default": "2024"
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/api/v1/finances/daily-revenue": {
+            "get": {
+              "tags": ["Statistic"],
+              "description": "Get the total sales revenue for each day in a specific month",
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "name": "year",
+                  "in": "query",
+                  "required": true,
+                  "type": "integer",
+                  "description": "Year for which daily revenue is requested"
+                },
+                {
+                  "name": "month",
+                  "in": "query",
+                  "required": true,
+                  "type": "integer",
+                  "description": "Month for which daily revenue is requested (1 to 12)"
+                }
+              ],
+              "responses": {}
+            }
           }
     }
 }

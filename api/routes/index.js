@@ -13,6 +13,7 @@ const swaggerDocument = require('../swagger.json')
 const { authPermission } = require('../middlewares/permission')
 const favorite = require('./favorite.js')
 const specialOffer = require('./specialOffer.js')
+const finance = require('./finance.js')
 
 module.exports = app => {
 
@@ -28,5 +29,6 @@ module.exports = app => {
     app.use('/api/v1/appointments', authenticate, appointment)
     app.use('/api/v1/favorites', authenticate, authRole(ROLE.USER), favorite)
     app.use('/api/v1/offers', authenticate, specialOffer)
+    app.use('/api/v1/finances', authenticate, finance)
 
 }

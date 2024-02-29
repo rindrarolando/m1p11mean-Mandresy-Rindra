@@ -1,5 +1,5 @@
-const helper = require('../helpers/common');
-const { canAddService } = require('../rbac/permissions');
+const helper = require('../helpers/common')
+const { canAddService } = require('../rbac/permissions')
 const serviceService = require('../services/serviceService')
 const ObjectID = require('mongoose').Types.ObjectId; 
 
