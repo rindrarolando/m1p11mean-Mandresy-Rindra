@@ -46,6 +46,12 @@ const Schema = new mongoose.Schema({
     price: {
         type: Number,
         required: 'Le prix des services du rendez-vous est nécessaire.'
+    },
+    discountPercentage: {
+        type: Number,
+        required: false,
+        min: 0,
+        max: 100,
     }
 
 })

@@ -320,6 +320,10 @@
                             "serviceId": "65ce55d55ee61cd2224848fd"
                           }
                         ]
+                      },
+                      "discountCode": {
+                        "type": "string",
+                        "example": "PROMO"
                       }
                     }
                   }
@@ -463,6 +467,94 @@
                   "required": true,
                   "type": "integer",
                   "description": "Month (1-12) for which daily appointments count is needed"
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/api/v1/finances/monthly-revenue": {
+            "get": {
+              "tags": ["Statistic"],
+              "description": "Get the total sales revenue for each month of an year",
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "name": "year",
+                  "in": "query",
+                  "required": true,
+                  "type": "number",
+                  "format": "date",
+                  "default": "2024"
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/api/v1/finances/daily-revenue": {
+            "get": {
+              "tags": ["Statistic"],
+              "description": "Get the total sales revenue for each day in a specific month",
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "name": "year",
+                  "in": "query",
+                  "required": true,
+                  "type": "integer",
+                  "description": "Year for which daily revenue is requested"
+                },
+                {
+                  "name": "month",
+                  "in": "query",
+                  "required": true,
+                  "type": "integer",
+                  "description": "Month for which daily revenue is requested (1 to 12)"
+                }
+              ],
+              "responses": {}
+            }
+          },
+          "/api/v1/finances/calculate-benefit": {
+            "post": {
+              "tags": ["Statistic"],
+              "description": "Calculate benefit",
+              "consumes": ["application/json"],
+              "parameters": [
+                { "name": "Authorization", "in": "header", "type": "string", "default": "Bearer ", "required": true  },
+                {
+                  "name": "body",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "integer",
+                        "description": "Year for which benefit is calculated"
+                      },
+                      "month": {
+                        "type": "integer",
+                        "description": "Month for which benefit is calculated"
+                      },
+                      "expenses": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Expense name"
+                            },
+                            "amount": {
+                              "type": "number",
+                              "description": "Expense amount"
+                            }
+                          }
+                        },
+                        "description": "Array of expenses"
+                      }
+                    }
+                  }
                 }
               ],
               "responses": {}
