@@ -1,0 +1,53 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4; /* Light gray background */
+}
+
+.login-form {
+    padding: 40px;
+    background-color: white; /* White form background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 100%;
+    max-width: 400px; /* Maximum width of the form */
+}
+
+.login-form h2 {
+    text-align: center; /* Center-align the title */
+    margin-bottom: 30px; /* Spacing below the title */
+    font-size: 24px; /* Title font size */
+    color: #333; /* Dark gray font color */
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding inside inputs */
+    margin-bottom: 20px; /* Spacing between inputs */
+    border-radius: 5px; /* Rounded corners for inputs */
+    border: 1px solid #ddd; /* Light gray border */
+    box-sizing: border-box; /* Include padding and border in the input's total width */
+}
+
+.login-form button {
+    width: 100%; /* Full width button */
+    padding: 10px; /* Padding inside the button */
+    background-color: #28a745; /* Green background color */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 18px; /* Button text size */
+}
+
+.login-form button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.login-form .form-footer {
+    text-align: center; /* Center-align footer content */
+    margin-top: 20px; /* Spacing above the footer */
+}

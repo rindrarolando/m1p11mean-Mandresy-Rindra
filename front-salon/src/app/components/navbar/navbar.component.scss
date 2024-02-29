@@ -1,0 +1,47 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  margin-left: 20px; /* Changed from margin-right to margin-left for spacing between links */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.navbar a:hover {
+  color: var(--accent-color);
+}
+
+/* Logo specific styles if needed */
+.logo {
+  height: 40px; /* Adjust based on your logo size */
+  margin-right: auto; /* Ensures logo stays on the left and pushes everything else to the right */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .nav-links {
+    margin-top: 10px;
+  }
+}
+
+.navbar-brand img {
+  height: 60px; /* Adjust based on your preference */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 15px; /* Space between logo and navbar links */
+}

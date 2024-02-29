@@ -1,0 +1,19 @@
+<div class="login-container">
+  <form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
+    <h2>Login</h2>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required autofocus>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required>
+    </div>
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+    <button type="submit" class="btn" [disabled]="!loginForm.valid">Login</button>
+  </form>
+</div>
+
+  

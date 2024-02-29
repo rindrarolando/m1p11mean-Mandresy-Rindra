@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+/* Define your color scheme */
+:root {
+    --primary-color: #d8a7b1; /* Soft pink */
+    --secondary-color: #ffffff; /* White */
+    --accent-color: #6d6875; /* Muted purple or gray for contrast */
+  }
+  
+  /* Typography */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap');
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+  
