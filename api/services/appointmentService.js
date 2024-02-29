@@ -1,6 +1,45 @@
 const Appointment = require('../models/appointment')
 var ObjectID = require('mongoose').Types.ObjectId 
 
+const getAppointmentsByEmployee = async(employeeId) => {
+    try {
+        let query = {
+            'mapServiceEmployees': {
+                $elemMatch: {
+                    'employee._id': employeeId
+                }
+            }
+        }
+
+        const employeeAppointments = await Appointment.find(query);
+
+        const matchingMapServiceEmployees = employeeAppointments.flatMap(appointment =>
+            appointment.mapServiceEmployees
+                .filter(mapServiceEmployee => mapServiceEmployee.employee._id.toString() === employeeId.toString())
+                .map((employeeAppointment) => {
+                    const serviceDurationInMinutes = employeeAppointment.service.duration || 0
+                    const startDateTime = new Date(employeeAppointment.startDateTime)
+                    const endDateTime = new Date(startDateTime.getTime() + serviceDurationInMinutes * 60000)
+
+                    const plainObject = employeeAppointment.toObject()
+
+                    // Delete the employee property
+                    delete plainObject.employee;
+
+                    return {
+                        ...plainObject,
+                        endDateTime
+                    }
+                })
+        )
+
+        return matchingMapServiceEmployees;
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
 const getEmployeeAppointmentHistory = async (userId, startDateTime, endDateTime) => {
     try {
         let query = {
@@ -10,10 +49,10 @@ const getEmployeeAppointmentHistory = async (userId, startDateTime, endDateTime)
                 }
             },
             startDateTime: { $gte: startDateTime }
-        };
+        }
 
         if (endDateTime) {
-            query.endDateTime = { $lte: endDateTime };
+            query.endDateTime = { $lte: endDateTime }
         }
 
         const employeeAppointments = await Appointment.find(query);
@@ -36,12 +75,12 @@ const getEmployeeAppointmentHistory = async (userId, startDateTime, endDateTime)
                         endDateTime
                     };
                 })
-        );
+        )
 
         return matchingMapServiceEmployees;
     } catch (error) {
-        console.error('Error fetching employee appointment history:', error);
-        throw error;
+        console.error(error)
+        throw error
     }
 }
 
@@ -118,5 +157,6 @@ module.exports = {
     getClientAppointmentHistory,
     getEmployeeAppointmentHistory,
     markAppointmentAsDone,
-    getDailyAppointmentsCount
+    getDailyAppointmentsCount,
+    getAppointmentsByEmployee
 }
